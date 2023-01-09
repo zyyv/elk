@@ -20,11 +20,33 @@ const { env } = useBuildInfo()
     </NuxtLink>
     <div hidden xl:flex items-center me-8 mt-2>
       <NuxtLink
+        key="back"
         :aria-label="$t('nav.back')"
-        @click="$router.go(-1)"
+        opacity-50 @click="$router.back()"
       >
         <div i-ri:arrow-left-line class="rtl-flip" btn-text />
+      </NuxtLink>
+
+      <NuxtLink
+        key="home"
+        :aria-label="$t('nav.home')"
+        to="/home"
+        outline-none
+      >
+        <div i-ri:home-5-line btn-text />
       </NuxtLink>
     </div>
   </div>
 </template>
+
+<style scoped>
+.v-enter-active,
+.v-leave-active {
+  transition: opacity 0.5s ease;
+}
+
+.v-enter-from,
+.v-leave-to {
+  opacity: 0;
+}
+</style>

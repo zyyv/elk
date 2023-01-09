@@ -25,7 +25,7 @@ const showUserPicker = logicAnd(
                 <div hidden xl:block>
                   <UserSignInEntry v-if="!currentUser" />
                 </div>
-                <div v-if="currentUser" p6 pb8 w-full>
+                <div v-if="currentUser" p6 w-full>
                   <div hidden xl-block>
                     <UserPicker v-if="showUserPicker" />
                     <div v-else flex="~" items-center justify-between>

@@ -12,7 +12,6 @@ const { notifications } = useNotifications()
     <NavSideItem :text="$t('nav.search')" to="/search" icon="i-ri:search-line" xl:hidden :command="command" />
 
     <div shrink hidden sm:block mt-4 />
-    <NavSideItem :text="$t('nav.home')" to="/home" icon="i-ri:home-5-line" user-only :command="command" />
     <NavSideItem :text="$t('nav.notifications')" to="/notifications" icon="i-ri:notification-4-line" user-only :command="command">
       <template #icon>
         <div flex relative>
@@ -34,6 +33,6 @@ const { notifications } = useNotifications()
     <NavSideItem :text="$t('nav.federated')" :to="`/${currentServer}/public`" icon="i-ri:earth-line" :command="command" />
 
     <div shrink hidden sm:block mt-4 />
-    <NavSideItem :text="$t('nav.settings')" to="/settings" icon="i-ri:settings-3-line" :command="command" />
+    <NavSideItem :text="$t('nav.settings')" to="/settings" icon="i-ri:settings-3-line" :command="command" class="-mb-2" />
   </nav>
 </template>
