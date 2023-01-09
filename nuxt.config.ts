@@ -20,7 +20,6 @@ export default defineNuxtConfig({
     '@unocss/nuxt',
     '@pinia/nuxt',
     '@vue-macros/nuxt',
-    '@nuxtjs/i18n',
     '@nuxtjs/color-mode',
     '~/modules/purge-comments',
     '~/modules/setup-components',
@@ -51,6 +50,7 @@ export default defineNuxtConfig({
       './composables/push-notifications',
       './composables/settings',
       './composables/tiptap',
+      './composables/fluent',
     ],
   },
   vite: {
