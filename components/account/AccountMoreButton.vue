@@ -54,7 +54,7 @@ const toggleReblogs = async () => {
     <template #popper>
       <NuxtLink :to="account.url" external target="_blank">
         <CommonDropdownItem
-          :text="$t('menu.open_in_original_site')"
+          :text="$t('menu_open_in_original_site')"
           icon="i-ri:arrow-right-up-line"
           :command="command"
         />
@@ -63,13 +63,13 @@ const toggleReblogs = async () => {
       <template v-if="currentUser">
         <template v-if="!isSelf">
           <CommonDropdownItem
-            :text="$t('menu.mention_account', [`@${account.acct}`])"
+            :text="$t('menu_mention_account', { username: `@${account.acct}` })"
             icon="i-ri:at-line"
             :command="command"
             @click="mentionUser(account)"
           />
           <CommonDropdownItem
-            :text="$t('menu.direct_message_account', [`@${account.acct}`])"
+            :text="$t('menu_direct_message_account', { username: `@${account.acct}` })"
             icon="i-ri:message-3-line"
             :command="command"
             @click="directMessageUser(account)"
@@ -78,13 +78,13 @@ const toggleReblogs = async () => {
           <CommonDropdownItem
             v-if="!relationship?.showingReblogs"
             icon="i-ri:repeat-line"
-            :text="$t('menu.show_reblogs', [`@${account.acct}`])"
+            :text="$t('menu_show_reblogs', { username: `@${account.acct}` })"
             :command="command"
             @click="toggleReblogs"
           />
           <CommonDropdownItem
             v-else
-            :text="$t('menu.hide_reblogs', [`@${account.acct}`])"
+            :text="$t('menu_hide_reblogs', { username: `@${account.acct}` })"
             icon="i-ri:repeat-line"
             :command="command"
             @click="toggleReblogs"
@@ -92,14 +92,14 @@ const toggleReblogs = async () => {
 
           <CommonDropdownItem
             v-if="!relationship?.muting"
-            :text="$t('menu.mute_account', [`@${account.acct}`])"
+            :text="$t('menu_mute_account', { username: `@${account.acct}` })"
             icon="i-ri:volume-up-fill"
             :command="command"
             @click="toggleMute"
           />
           <CommonDropdownItem
             v-else
-            :text="$t('menu.unmute_account', [`@${account.acct}`])"
+            :text="$t('menu_unmute_account', { username: `@${account.acct}` })"
             icon="i-ri:volume-mute-line"
             :command="command"
             @click="toggleMute"
@@ -107,14 +107,14 @@ const toggleReblogs = async () => {
 
           <CommonDropdownItem
             v-if="!relationship?.blocking"
-            :text="$t('menu.block_account', [`@${account.acct}`])"
+            :text="$t('menu_block_account', { username: `@${account.acct}` })"
             icon="i-ri:forbid-2-line"
             :command="command"
             @click="toggleBlockUser"
           />
           <CommonDropdownItem
             v-else
-            :text="$t('menu.unblock_account', [`@${account.acct}`])"
+            :text="$t('menu_unblock_account', { username: `@${account.acct}` })"
             icon="i-ri:checkbox-circle-line"
             :command="command"
             @click="toggleBlockUser"
@@ -123,14 +123,14 @@ const toggleReblogs = async () => {
           <template v-if="getServerName(account) !== currentServer">
             <CommonDropdownItem
               v-if="!relationship?.domainBlocking"
-              :text="$t('menu.block_domain', [getServerName(account)])"
+              :text="$t('menu_block_domain', { domain: getServerName(account) })"
               icon="i-ri:shut-down-line"
               :command="command"
               @click="toggleBlockDomain"
             />
             <CommonDropdownItem
               v-else
-              :text="$t('menu.unblock_domain', [getServerName(account)])"
+              :text="$t('menu_unblock_domain', { domain: getServerName(account) })"
               icon="i-ri:restart-line"
               :command="command"
               @click="toggleBlockDomain"
@@ -140,19 +140,19 @@ const toggleReblogs = async () => {
 
         <template v-else>
           <NuxtLink to="/pinned">
-            <CommonDropdownItem :text="$t('account.pinned')" icon="i-ri:pushpin-line" :command="command" />
+            <CommonDropdownItem :text="$t('account_pinned')" icon="i-ri:pushpin-line" :command="command" />
           </NuxtLink>
           <NuxtLink to="/favourites">
-            <CommonDropdownItem :text="$t('account.favourites')" icon="i-ri:heart-3-line" :command="command" />
+            <CommonDropdownItem :text="$t('account_favourites')" icon="i-ri:heart-3-line" :command="command" />
           </NuxtLink>
           <NuxtLink to="/mutes">
-            <CommonDropdownItem :text="$t('account.muted_users')" icon="i-ri:volume-mute-line" :command="command" />
+            <CommonDropdownItem :text="$t('account_muted_users')" icon="i-ri:volume-mute-line" :command="command" />
           </NuxtLink>
           <NuxtLink to="/blocks">
-            <CommonDropdownItem :text="$t('account.blocked_users')" icon="i-ri:forbid-2-line" :command="command" />
+            <CommonDropdownItem :text="$t('account_blocked_users')" icon="i-ri:forbid-2-line" :command="command" />
           </NuxtLink>
           <NuxtLink to="/domain_blocks">
-            <CommonDropdownItem :text="$t('account.blocked_domains')" icon="i-ri:shut-down-line" :command="command" />
+            <CommonDropdownItem :text="$t('account_blocked_domains')" icon="i-ri:shut-down-line" :command="command" />
           </NuxtLink>
         </template>
       </template>

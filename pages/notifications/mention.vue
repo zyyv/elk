@@ -1,7 +1,7 @@
 <script setup lang="ts">
-const { t } = useI18n()
+const { $t } = useFluent()
 useHeadFixed({
-  title: () => `${t('tab.notifications_mention')} | ${t('nav.notifications')}`,
+  title: () => `${$t('tab_notifications_mention')} | ${$t('nav_notifications')}`,
 })
 </script>
 

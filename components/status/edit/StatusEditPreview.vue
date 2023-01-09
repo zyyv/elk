@@ -11,7 +11,7 @@ const { edit } = defineProps<{
     <div text-center flex="~ row gap-1 wrap">
       <AccountInlineInfo :account="edit.account" />
       <span>
-        {{ $t('status_history.edited', [useFormattedDateTime(edit.createdAt).value]) }}
+        {{ $t('status_history_edited', { date: useFormattedDateTime(edit.createdAt).value }) }}
       </span>
     </div>
 

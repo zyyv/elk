@@ -12,6 +12,6 @@ const online = useOnline()
     border="t base" flex="~ gap-2 center"
   >
     <div i-ri:wifi-off-line />
-    {{ $t('common.offline_desc') }}
+    {{ $t('common_offline_desc') }}
   </div>
 </template>

@@ -27,7 +27,7 @@ const emit = defineEmits<{
   (evt: 'published', status: mastodon.v1.Status): void
 }>()
 
-const { t } = useI18n()
+const { $t } = useFluent()
 
 let { draft, isEmpty } = $(useDraft(draftKey, initial))
 
@@ -43,7 +43,7 @@ const { editor } = useTiptap({
       draft.lastUpdated = Date.now()
     },
   }),
-  placeholder: computed(() => placeholder ?? draft.params.inReplyToId ? t('placeholder.replying') : t('placeholder.default_1')),
+  placeholder: computed(() => placeholder ?? draft.params.inReplyToId ? $t('placeholder_replying') : $t('placeholder_default_1')),
   autofocus: shouldExpanded,
   onSubmit: publish,
   onFocus() {
@@ -116,7 +116,7 @@ async function uploadAttachments(files: File[]) {
     }
     else {
       isExceedingAttachmentLimit = true
-      failed = [...failed, [file.name, t('state.attachments_limit_error')]]
+      failed = [...failed, [file.name, $t('state_attachments_limit_error')]]
     }
   }
   isUploading = false
@@ -198,7 +198,7 @@ const isPublishDisabled = computed(() => {
     <template v-if="draft.editingStatus">
       <div flex="~ col gap-1">
         <div id="state-editing" text-secondary self-center>
-          {{ $t('state.editing') }}
+          {{ $t('state_editing') }}
         </div>
         <StatusCard :status="draft.editingStatus" :actions="false" :hover="false" px-0 />
       </div>
@@ -220,7 +220,7 @@ const isPublishDisabled = computed(() => {
           <input
             v-model="draft.params.spoilerText"
             type="text"
-            :placeholder="$t('placeholder.content_warning')"
+            :placeholder="$t('placeholder_content_warning')"
             p2 border-rounded w-full bg-transparent
             outline-none border="~ base"
           >
@@ -236,7 +236,7 @@ const isPublishDisabled = computed(() => {
 
         <div v-if="isUploading" flex gap-1 items-center text-sm p1 text-primary>
           <div i-ri:loader-2-fill animate-spin />
-          {{ $t('state.uploading') }}
+          {{ $t('state_uploading') }}
         </div>
         <div
           v-else-if="failed.length > 0"
@@ -251,13 +251,13 @@ const isPublishDisabled = computed(() => {
           <head id="upload-failed" flex justify-between>
             <div flex items-center gap-x-2 font-bold>
               <div aria-hidden="true" i-ri:error-warning-fill />
-              <p>{{ $t('state.upload_failed') }}</p>
+              <p>{{ $t('state_upload_failed') }}</p>
             </div>
-            <CommonTooltip placement="bottom" :content="$t('action.clear_upload_failed')">
+            <CommonTooltip placement="bottom" :content="$t('action_clear_upload_failed')">
               <button
                 flex rounded-4 p1
                 hover:bg-active cursor-pointer transition-100
-                :aria-label="$t('action.clear_upload_failed')"
+                :aria-label="$t('action_clear_upload_failed')"
                 @click="failed = []"
               >
                 <span aria-hidden="true" w="1.75em" h="1.75em" i-ri:close-line />
@@ -265,7 +265,7 @@ const isPublishDisabled = computed(() => {
             </CommonTooltip>
           </head>
           <div v-if="isExceedingAttachmentLimit" id="uploads-per-post" ps-2 sm:ps-1 text-small>
-            {{ $t('state.attachments_exceed_server_limit') }}
+            {{ $t('state_attachments_exceed_server_limit') }}
           </div>
           <ol ps-2 sm:ps-1>
             <li v-for="error in failed" :key="error[0]" flex="~ col sm:row" gap-y-1 sm:gap-x-2>
@@ -296,22 +296,22 @@ const isPublishDisabled = computed(() => {
           @select="insertEmoji"
           @select-custom="insertCustomEmoji"
         >
-          <button btn-action-icon :title="$t('tooltip.emoji')">
+          <button btn-action-icon :title="$t('tooltip_emoji')">
             <div i-ri:emotion-line />
           </button>
         </PublishEmojiPicker>
 
-        <CommonTooltip placement="top" :content="$t('tooltip.add_media')">
-          <button btn-action-icon :aria-label="$t('tooltip.add_media')" @click="pickAttachments">
+        <CommonTooltip placement="top" :content="$t('tooltip_add_media')">
+          <button btn-action-icon :aria-label="$t('tooltip_add_media')" @click="pickAttachments">
             <div i-ri:image-add-line />
           </button>
         </CommonTooltip>
 
         <template v-if="editor">
-          <CommonTooltip placement="top" :content="$t('tooltip.toggle_code_block')">
+          <CommonTooltip placement="top" :content="$t('tooltip_toggle_code_block')">
             <button
               btn-action-icon
-              :aria-label="$t('tooltip.toggle_code_block')"
+              :aria-label="$t('tooltip_toggle_code_block')"
               :class="editor.isActive('codeBlock') ? 'text-primary' : ''"
               @click="editor?.chain().focus().toggleCodeBlock().run()"
             >
@@ -326,16 +326,16 @@ const isPublishDisabled = computed(() => {
           {{ characterCount ?? 0 }}<span text-secondary-light>/</span><span text-secondary-light>{{ characterLimit }}</span>
         </div>
 
-        <CommonTooltip placement="top" :content="$t('tooltip.add_content_warning')">
-          <button btn-action-icon :aria-label="$t('tooltip.add_content_warning')" @click="toggleSensitive">
+        <CommonTooltip placement="top" :content="$t('tooltip_add_content_warning')">
+          <button btn-action-icon :aria-label="$t('tooltip_add_content_warning')" @click="toggleSensitive">
             <div v-if="draft.params.sensitive" i-ri:alarm-warning-fill text-orange />
             <div v-else i-ri:alarm-warning-line />
           </button>
         </CommonTooltip>
 
-        <CommonTooltip placement="top" :content="$t('tooltip.change_language')">
+        <CommonTooltip placement="top" :content="$t('tooltip_change_language')">
           <CommonDropdown placement="bottom" auto-boundary-max-size>
-            <button btn-action-icon :aria-label="$t('tooltip.change_language')" w-12 mr--1>
+            <button btn-action-icon :aria-label="$t('tooltip_change_language')" w-12 mr--1>
               <div i-ri:translate-2 />
               <div i-ri:arrow-down-s-line text-sm text-secondary me--1 />
             </button>
@@ -348,14 +348,14 @@ const isPublishDisabled = computed(() => {
 
         <PublishVisibilityPicker v-model="draft.params.visibility" :editing="!!draft.editingStatus">
           <template #default="{ visibility }">
-            <button :disabled="!!draft.editingStatus" :aria-label="$t('tooltip.change_content_visibility')" btn-action-icon :class="{ 'w-12': !draft.editingStatus }">
+            <button :disabled="!!draft.editingStatus" :aria-label="$t('tooltip_change_content_visibility')" btn-action-icon :class="{ 'w-12': !draft.editingStatus }">
               <div :class="visibility.icon" />
               <div v-if="!draft.editingStatus" i-ri:arrow-down-s-line text-sm text-secondary me--1 />
             </button>
           </template>
         </PublishVisibilityPicker>
 
-        <CommonTooltip id="publish-tooltip" placement="top" :content="$t('tooltip.add_publishable_content')" :disabled="!isPublishDisabled">
+        <CommonTooltip id="publish-tooltip" placement="top" :content="$t('tooltip_add_publishable_content')" :disabled="!isPublishDisabled">
           <button
             btn-solid rounded-3 text-sm w-full
             md:w-fit
@@ -364,7 +364,7 @@ const isPublishDisabled = computed(() => {
             aria-describedby="publish-tooltip"
             @click="publish"
           >
-            {{ !draft.editingStatus ? $t('action.publish') : $t('action.save_changes') }}
+            {{ !draft.editingStatus ? $t('action_publish') : $t('action_save_changes') }}
           </button>
         </CommonTooltip>
       </div>

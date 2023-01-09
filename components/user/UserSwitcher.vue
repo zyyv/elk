@@ -40,13 +40,13 @@ const switchUser = (user: UserLogin) => {
     </template>
     <div border="t base" pt2>
       <CommonDropdownItem
-        :text="$t('user.add_existing')"
+        :text="$t('user_add_existing')"
         icon="i-ri:user-add-line"
         @click="openSigninDialog"
       />
       <CommonDropdownItem
         v-if="isMastoInitialised && currentUser"
-        :text="$t('user.sign_out_account', [getFullHandle(currentUser.account)])"
+        :text="$t('user_sign_out_account', { username: getFullHandle(currentUser.account) })"
         icon="i-ri:logout-box-line rtl-flip"
         @click="signout"
       />

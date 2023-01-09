@@ -3,19 +3,19 @@ definePageMeta({
   middleware: 'auth',
 })
 
-const { t } = useI18n()
+const { $t } = useFluent()
 const pwaEnabled = useRuntimeConfig().public.pwaEnabled
 
 const tabs = $computed(() => [
   {
     name: 'all',
     to: '/notifications',
-    display: t('tab.notifications_all'),
+    display: $t('tab_notifications_all'),
   },
   {
     name: 'mention',
     to: '/notifications/mention',
-    display: t('tab.notifications_mention'),
+    display: $t('tab_notifications_mention'),
   },
 ] as const)
 </script>
@@ -25,7 +25,7 @@ const tabs = $computed(() => [
     <template #title>
       <NuxtLink to="/notifications" timeline-title-style flex items-center gap-2 @click="$scrollToTop">
         <div i-ri:notification-4-line />
-        <span>{{ t('nav.notifications') }}</span>
+        <span>{{ $t('nav_notifications') }}</span>
       </NuxtLink>
     </template>
 
@@ -33,7 +33,7 @@ const tabs = $computed(() => [
       <NuxtLink
         flex rounded-4 p1
         hover:bg-active cursor-pointer transition-100
-        :title="t('settings.notifications.show_btn')"
+        :title="$t('settings_notifications_show_btn')"
         to="/settings/notifications"
       >
         <span aria-hidden="true" i-ri:notification-badge-line />

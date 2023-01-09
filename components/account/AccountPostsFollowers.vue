@@ -16,7 +16,7 @@ defineProps<{
     >
       <template #default="{ isExactActive }">
         <CommonLocalizedNumber
-          keypath="account.posts_count"
+          keypath="account_posts_count"
           :count="account.statusesCount"
           font-bold
           :class="isExactActive ? 'text-primary' : 'text-base'"
@@ -30,7 +30,7 @@ defineProps<{
     >
       <template #default="{ isExactActive }">
         <CommonLocalizedNumber
-          keypath="account.following_count"
+          keypath="account_following_count"
           :count="account.followingCount"
           font-bold
           :class="isExactActive ? 'text-primary' : 'text-base'"
@@ -44,7 +44,7 @@ defineProps<{
     >
       <template #default="{ isExactActive }">
         <CommonLocalizedNumber
-          keypath="account.followers_count"
+          keypath="account_followers_count"
           :count="account.followersCount"
           font-bold
           :class="isExactActive ? 'text-primary' : 'text-base'"

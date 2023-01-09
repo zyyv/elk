@@ -12,7 +12,7 @@ const formatted = useFormattedDateTime(editedAt)
 
 <template>
   <template v-if="editedAt">
-    <CommonTooltip v-if="inline" :content="$t('status.edited', [formatted])">
+    <CommonTooltip v-if="inline" :content="$t('status_edited', { date: formatted })">
       &#160;
       <time
         :title="editedAt"
@@ -28,7 +28,7 @@ const formatted = useFormattedDateTime(editedAt)
       <template #popper>
         <div text-sm p2>
           <div text-center mb1>
-            {{ $t('status.edited', [formatted]) }}
+            {{ $t('status_edited', { date: formatted }) }}
           </div>
           <StatusEditHistory :status="status" />
         </div>

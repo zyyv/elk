@@ -11,11 +11,11 @@ defineProps<{
     text-secondary-light
   >
     <slot name="prepend" />
-    <CommonTooltip :content="$t('account.bot')" :disabled="showLabel">
+    <CommonTooltip :content="$t('account_bot')" :disabled="showLabel">
       <div i-ri:robot-line />
     </CommonTooltip>
     <div v-if="showLabel">
-      {{ $t('account.bot') }}
+      {{ $t('account_bot') }}
     </div>
   </div>
 </template>

@@ -26,7 +26,7 @@ const { modelValue: file } = defineModel<{
   modelValue: FileWithHandle | null
 }>()
 
-const { t } = useI18n()
+const { $t } = useFluent()
 
 const defaultImage = computed(() => props.original || '')
 /** Preview of selected images */
@@ -41,11 +41,11 @@ const pickImage = async () => {
   })
 
   if (!props.allowedFileTypes.includes(image.type)) {
-    emit('error', 1, t('error.unsupported_file_format'))
+    emit('error', 1, $t('error_unsupported_file_format'))
     return
   }
   else if (image.size > props.allowedFileSize) {
-    emit('error', 2, t('error.file_size_cannot_exceed_n_mb', [5]))
+    emit('error', 2, $t('error_file_size_cannot_exceed_n_mb', { size: props.allowedFileSize / 1024 / 1024 }))
     return
   }
 

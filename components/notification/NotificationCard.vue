@@ -20,7 +20,7 @@ const { notification } = defineProps<{
           <div i-ri:user-follow-fill me-1 color-primary />
           <AccountDisplayName :account="notification.account" text-primary me-1 font-bold line-clamp-1 ws-pre-wrap break-all />
           <span ws-nowrap>
-            {{ $t('notification.followed_you') }}
+            {{ $t('notification_followed_you') }}
           </span>
         </div>
         <AccountBigCard
@@ -36,7 +36,7 @@ const { notification } = defineProps<{
           :account="notification.account"
           text-purple me-1 font-bold line-clamp-1 ws-pre-wrap break-all
         />
-        <span>{{ $t("notification.signed_up") }}</span>
+        <span>{{ $t("notification_signed_up") }}</span>
       </div>
     </template>
     <template v-else-if="notification.type === 'follow_request'">
@@ -74,7 +74,7 @@ const { notification } = defineProps<{
             <div i-ri:edit-2-fill text-xl me-1 text-secondary />
             <AccountInlineInfo :account="notification.account" me1 />
             <span ws-nowrap>
-              {{ $t('notification.update_status') }}
+              {{ $t('notification_update_status') }}
             </span>
           </div>
         </template>
@@ -85,7 +85,7 @@ const { notification } = defineProps<{
     </template>
     <template v-else>
       <div text-red font-bold>
-        [DEV] {{ $t('notification.missing_type') }} '{{ notification.type }}'
+        [DEV] {{ $t('notification_missing_type') }} '{{ notification.type }}'
       </div>
     </template>
   </article>

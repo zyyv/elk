@@ -1,5 +1,5 @@
 <script setup lang="ts">
-const { t } = useI18n()
+const { $t } = useFluent()
 const route = useRoute()
 
 const server = $(computedEager(() => route.params.server as string))
@@ -12,7 +12,7 @@ const tabs = $computed(() => [
       name: 'account-index',
       params: { server, account },
     },
-    display: t('tab.posts'),
+    display: $t('tab_posts'),
     icon: 'i-ri:file-list-2-line',
   },
   {
@@ -21,7 +21,7 @@ const tabs = $computed(() => [
       name: 'account-replies',
       params: { server, account },
     },
-    display: t('tab.posts_with_replies'),
+    display: $t('tab_posts_with_replies'),
     icon: 'i-ri:chat-1-line',
   },
   {
@@ -30,7 +30,7 @@ const tabs = $computed(() => [
       name: 'account-media',
       params: { server, account },
     },
-    display: t('tab.media'),
+    display: $t('tab_media'),
     icon: 'i-ri:camera-2-line',
   },
 ] as const)

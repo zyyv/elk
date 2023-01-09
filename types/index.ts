@@ -48,8 +48,6 @@ export interface GroupedLikeNotifications {
 
 export type NotificationSlot = GroupedNotifications | GroupedLikeNotifications | mastodon.v1.Notification
 
-export type TranslateFn = ReturnType<typeof useI18n>['t']
-
 export interface Draft {
   editingStatus?: mastodon.v1.Status
   initialText?: string

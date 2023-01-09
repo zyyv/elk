@@ -1,7 +1,7 @@
 <script setup lang="ts">
 definePageMeta({ name: 'account-replies' })
 
-const { t } = useI18n()
+const { $t } = useFluent()
 const params = useRoute().params
 const handle = $(computedEager(() => params.account as string))
 
@@ -11,7 +11,7 @@ const paginator = useMasto().v1.accounts.listStatuses(account.id, { excludeRepli
 
 if (account) {
   useHeadFixed({
-    title: () => `${t('tab.posts_with_replies')} | ${getDisplayName(account)} (@${account.acct})`,
+    title: () => `${$t('tab_posts_with_replies')} | ${getDisplayName(account)} (@${account.acct})`,
   })
 }
 </script>

@@ -1,9 +1,9 @@
 <script setup lang="ts">
 const buildInfo = useBuildInfo()
-const { t } = useI18n()
+const { $t } = useFluent()
 
 useHeadFixed({
-  title: () => `${t('settings.about.label')} | ${t('nav.settings')}`,
+  title: () => `${$t('settings_about_label')} | ${$t('nav_settings')}`,
 })
 
 let showCommit = $ref(buildInfo.env !== 'release' && buildInfo.env !== 'dev')
@@ -20,7 +20,7 @@ const handleShowCommit = () => {
   <MainContent back-on-small-screen>
     <template #title>
       <div text-lg font-bold flex items-center gap-2 @click="$scrollToTop">
-        <span>{{ $t('settings.about.label') }}</span>
+        <span>{{ $t('settings_about_label') }}</span>
       </div>
     </template>
 
@@ -52,7 +52,7 @@ const handleShowCommit = () => {
     <div h-1px bg-border my2 />
 
     <SettingsItem
-      :text="$t('nav.show_intro')"
+      :text="$t('nav_show_intro')"
       icon="i-ri:article-line"
       cursor-pointer
       @click="openPreviewHelp"

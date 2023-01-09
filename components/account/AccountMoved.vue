@@ -10,7 +10,7 @@ defineProps<{
   <div flex="~ col gap-2" p4>
     <div flex="~ gap-1" justify-center>
       <AccountInlineInfo :account="account" :link="false" />
-      {{ $t('account.moved_title') }}
+      {{ $t('account_moved_title') }}
     </div>
 
     <div flex>
@@ -21,7 +21,7 @@ defineProps<{
       <div flex items-center>
         <NuxtLink :to="getAccountRoute(account.moved as any)">
           <button btn-solid h-fit>
-            {{ $t('account.go_to_profile') }}
+            {{ $t('account_go_to_profile') }}
           </button>
         </NuxtLink>
       </div>

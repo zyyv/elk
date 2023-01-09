@@ -17,16 +17,16 @@ function showRebloggedBy() {
   type.value = 'boosted-by'
 }
 
-const { t } = useI18n()
+const { $t } = useFluent()
 const tabs = [
   {
     name: 'favourited-by',
-    display: t('status.favourited_by'),
+    display: $t('status_favourited_by'),
     onClick: showFavouritedBy,
   },
   {
     name: 'boosted-by',
-    display: t('status.boosted_by'),
+    display: $t('status_boosted_by'),
     onClick: showRebloggedBy,
   },
 ]

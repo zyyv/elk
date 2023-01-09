@@ -39,16 +39,16 @@ onUnmounted(() => locked.value = false)
 <template>
   <div relative h-full w-full flex pt-12 w-100vh @click="onClick">
     <button
-      v-if="hasNext" pointer-events-auto btn-action-icon bg="black/20" :aria-label="$t('action.previous')"
+      v-if="hasNext" pointer-events-auto btn-action-icon bg="black/20" :aria-label="$t('action_prev')"
       hover:bg="black/40" dark:bg="white/30" dark-hover:bg="white/20" absolute top="1/2" right-1 z5
-      :title="$t('action.next')" @click="next"
+      :title="$t('action_next')" @click="next"
     >
       <div i-ri:arrow-right-s-line text-white />
     </button>
     <button
-      v-if="hasPrev" pointer-events-auto btn-action-icon bg="black/20" aria-label="action.next"
+      v-if="hasPrev" pointer-events-auto btn-action-icon bg="black/20" :aria-label="$t('action_next')"
       hover:bg="black/40" dark:bg="white/30" dark:hover-bg="white/20" absolute top="1/2" left-1 z5
-      :title="$t('action.prev')" @click="prev"
+      :title="$t('action_prev')" @click="prev"
     >
       <div i-ri:arrow-left-s-line text-white />
     </button>

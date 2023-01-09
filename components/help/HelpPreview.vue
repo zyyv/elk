@@ -12,23 +12,23 @@ const emit = defineEmits<{
 
     <img :alt="$t('app_logo')" src="/logo.svg" w-20 h-20 height="80" width="80" mxa class="rtl-flip">
     <h1 mxa text-4xl mb4>
-      {{ $t('help.title') }}
+      {{ $t('help_title') }}
     </h1>
     <p>
-      {{ $t('help.desc_para1') }}
+      {{ $t('help_desc_para1') }}
     </p>
     <p>
-      <b text-primary>{{ $t('help.desc_highlight') }}</b>
-      {{ $t('help.desc_para2') }}
+      <b text-primary>{{ $t('help_desc_highlight') }}</b>
+      {{ $t('help_desc_para2') }}
     </p>
     <p>
-      {{ $t('help.desc_para4') }}
+      {{ $t('help_desc_para4') }}
       <a font-bold text-primary href="/m.webtoo.ls/@elk" target="_blank">
-        {{ $t('help.desc_para5') }}
+        {{ $t('help_desc_para5') }}
       </a>
-      {{ $t('help.desc_para6') }}
+      {{ $t('help_desc_para6') }}
     </p>
-    {{ $t('help.desc_para3') }}
+    {{ $t('help_desc_para3') }}
     <p flex="~ gap-2 wrap" mxa>
       <template v-for="team of teams" :key="team.github">
         <a :href="`https://github.com/sponsors/${team.github}`" target="_blank" rounded-full transition duration-300 border="~ transparent" hover="scale-105 border-primary">
@@ -41,7 +41,7 @@ const emit = defineEmits<{
     </p>
 
     <button btn-solid mxa tabindex="2" @click="emit('close')">
-      {{ $t('action.enter_app') }}
+      {{ $t('action_enter_app') }}
     </button>
   </div>
 </template>

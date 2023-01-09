@@ -45,8 +45,6 @@ defineSlots<{
   done: {}
 }>()
 
-const { t } = useI18n()
-
 const { items, prevItems, update, state, endAnchor, error } = usePaginator(paginator, stream, eventType, preprocess)
 </script>
 
@@ -91,11 +89,11 @@ const { items, prevItems, update, state, endAnchor, error } = usePaginator(pagin
     </slot>
     <slot v-else-if="state === 'done'" name="done">
       <div p5 text-secondary italic text-center>
-        {{ t('common.end_of_list') }}
+        {{ $t('common_end_of_list') }}
       </div>
     </slot>
     <div v-else-if="state === 'error'" p5 text-secondary>
-      {{ t('common.error') }}: {{ error }}
+      {{ $t('common_error') }}: {{ error }}
     </div>
   </div>
 </template>

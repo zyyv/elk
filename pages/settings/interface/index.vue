@@ -1,8 +1,8 @@
 <script setup lang="ts">
-const { t } = useI18n()
+const { $t } = useFluent()
 
 useHeadFixed({
-  title: () => `${t('settings.interface.label')} | ${t('nav.settings')}`,
+  title: () => `${$t('settings_interface_label')} | ${$t('nav_settings')}`,
 })
 </script>
 
@@ -10,17 +10,17 @@ useHeadFixed({
   <MainContent back-on-small-screen>
     <template #title>
       <div text-lg font-bold flex items-center gap-2 @click="$scrollToTop">
-        <span>{{ $t('settings.interface.label') }}</span>
+        <span>{{ $t('settings_interface_label') }}</span>
       </div>
     </template>
     <div p6 flex="~ col gap6">
       <label space-y-2>
-        <p font-medium>{{ $t('settings.interface.font_size') }}</p>
+        <p font-medium>{{ $t('settings_interface_font_size') }}</p>
         <SettingsFontSize select-settings />
       </label>
       <div space-y-2>
         <p font-medium>
-          {{ $t('settings.interface.color_mode') }}
+          {{ $t('settings_interface_color_mode') }}
         </p>
         <SettingsColorMode />
       </div>

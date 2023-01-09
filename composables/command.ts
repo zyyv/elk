@@ -1,8 +1,7 @@
-import type { ComputedRef } from 'vue'
 import { defineStore } from 'pinia'
 import Fuse from 'fuse.js'
-import type { LocaleObject } from '#i18n'
 import type { SearchResult } from '~/composables/masto/search'
+import { locale, locales } from '~~/config/i18n'
 
 // @unocss-include
 
@@ -238,8 +237,7 @@ export function useCommands(cmds: () => CommandProvider[]) {
 }
 
 export const provideGlobalCommands = () => {
-  const { locale, t } = useI18n()
-  const { locales } = useI18n() as { locales: ComputedRef<LocaleObject[]> }
+  const { $t } = useFluent()
   const router = useRouter()
   const users = useUsers()
   const masto = useMasto()
@@ -248,7 +246,7 @@ export const provideGlobalCommands = () => {
   useCommand({
     scope: 'Navigation',
 
-    name: () => t('nav.settings'),
+    name: () => $t('nav_settings'),
     icon: 'i-ri:settings-3-line',
 
     onActivate() {
@@ -259,7 +257,7 @@ export const provideGlobalCommands = () => {
   useCommand({
     scope: 'Preferences',
 
-    name: () => t('command.toggle_dark_mode'),
+    name: () => $t('command_toggle_dark_mode'),
     icon: () => colorMode.value === 'light' ? 'i-ri:sun-line' : 'i-ri:moon-line',
 
     onActivate() {
@@ -270,7 +268,7 @@ export const provideGlobalCommands = () => {
   useCommand({
     scope: 'Preferences',
 
-    name: () => t('command.toggle_zen_mode'),
+    name: () => $t('command_toggle_zen_mode'),
     icon: () => userSettings.value.zenMode ? 'i-ri:layout-right-2-line' : 'i-ri:layout-right-line',
 
     onActivate() {
@@ -281,7 +279,7 @@ export const provideGlobalCommands = () => {
   useCommand({
     scope: 'Preferences',
 
-    name: () => t('command.select_lang'),
+    name: () => $t('command_select_lang'),
     icon: 'i-ri:earth-line',
 
     onComplete: () => ({
@@ -289,7 +287,7 @@ export const provideGlobalCommands = () => {
       display: 'Languages',
     }),
   })
-  useCommands(() => locales.value.map(l => ({
+  useCommands(() => locales.map(l => ({
     parent: 'language',
     scope: 'Languages',
 
@@ -304,8 +302,8 @@ export const provideGlobalCommands = () => {
   useCommand({
     scope: 'Account',
 
-    name: () => t('action.sign_in'),
-    description: () => t('command.sign_in_desc'),
+    name: () => $t('action_sign_in'),
+    description: () => $t('command_sign_in_desc'),
     icon: 'i-ri:user-add-line',
 
     onActivate() {
@@ -317,8 +315,8 @@ export const provideGlobalCommands = () => {
 
     visible: () => users.value.length > 1,
 
-    name: () => t('action.switch_account'),
-    description: () => t('command.switch_account_desc'),
+    name: () => $t('action_switch_account'),
+    description: () => $t('command_switch_account_desc'),
     icon: 'i-ri:user-shared-line',
 
     onComplete: () => ({
@@ -332,7 +330,7 @@ export const provideGlobalCommands = () => {
 
     visible: () => user.account.id !== currentUser.value?.account.id,
 
-    name: () => t('command.switch_account', [getFullHandle(user.account)]),
+    name: () => $t('command_switch_account', { username: getFullHandle(user.account) }),
     icon: 'i-ri:user-shared-line',
 
     onActivate() {
@@ -344,7 +342,7 @@ export const provideGlobalCommands = () => {
 
     visible: () => currentUser.value,
 
-    name: () => t('user.sign_out_account', [getFullHandle(currentUser.value!.account)]),
+    name: () => $t('user_sign_out_account', { username: getFullHandle(currentUser.value!.account) }),
     icon: 'i-ri:logout-box-line',
 
     onActivate() {

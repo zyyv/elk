@@ -9,11 +9,11 @@ const { notifications } = useNotifications()
   <nav sm:px3 flex="~ col gap2" shrink text-size-base leading-normal md:text-lg>
     <div shrink hidden sm:block mt-4 />
     <SearchWidget lg:ms-1 lg:me-5 hidden xl:block />
-    <NavSideItem :text="$t('nav.search')" to="/search" icon="i-ri:search-line" xl:hidden :command="command" />
+    <NavSideItem :text="$t('nav_search')" to="/search" icon="i-ri:search-line" xl:hidden :command="command" />
 
     <div shrink hidden sm:block mt-4 />
-    <NavSideItem :text="$t('nav.home')" to="/home" icon="i-ri:home-5-line" user-only :command="command" />
-    <NavSideItem :text="$t('nav.notifications')" to="/notifications" icon="i-ri:notification-4-line" user-only :command="command">
+    <NavSideItem :text="$t('nav_home')" to="/home" icon="i-ri:home-5-line" user-only :command="command" />
+    <NavSideItem :text="$t('nav_notifications')" to="/notifications" icon="i-ri:notification-4-line" user-only :command="command">
       <template #icon>
         <div flex relative>
           <div class="i-ri:notification-4-line" md:text-size-inherit text-xl />
@@ -23,17 +23,17 @@ const { notifications } = useNotifications()
         </div>
       </template>
     </NavSideItem>
-    <NavSideItem :text="$t('nav.conversations')" to="/conversations" icon="i-ri:at-line" user-only :command="command" />
-    <NavSideItem :text="$t('nav.favourites')" to="/favourites" icon="i-ri:heart-3-line" user-only :command="command" />
-    <NavSideItem :text="$t('nav.bookmarks')" to="/bookmarks" icon="i-ri:bookmark-line" user-only :command="command" />
-    <NavSideItem :text="$t('action.compose')" to="/compose" icon="i-ri:quill-pen-line" user-only :command="command" />
+    <NavSideItem :text="$t('nav_conversations')" to="/conversations" icon="i-ri:at-line" user-only :command="command" />
+    <NavSideItem :text="$t('nav_favourites')" to="/favourites" icon="i-ri:heart-3-line" user-only :command="command" />
+    <NavSideItem :text="$t('nav_bookmarks')" to="/bookmarks" icon="i-ri:bookmark-line" user-only :command="command" />
+    <NavSideItem :text="$t('action_compose')" to="/compose" icon="i-ri:quill-pen-line" user-only :command="command" />
 
     <div shrink hidden sm:block mt-4 />
-    <NavSideItem :text="$t('nav.explore')" :to="`/${currentServer}/explore`" icon="i-ri:hashtag" :command="command" />
-    <NavSideItem :text="$t('nav.local')" :to="`/${currentServer}/public/local`" icon="i-ri:group-2-line " :command="command" />
-    <NavSideItem :text="$t('nav.federated')" :to="`/${currentServer}/public`" icon="i-ri:earth-line" :command="command" />
+    <NavSideItem :text="$t('nav_explore')" :to="`/${currentServer}/explore`" icon="i-ri:hashtag" :command="command" />
+    <NavSideItem :text="$t('nav_local')" :to="`/${currentServer}/public/local`" icon="i-ri:group-2-line " :command="command" />
+    <NavSideItem :text="$t('nav_federated')" :to="`/${currentServer}/public`" icon="i-ri:earth-line" :command="command" />
 
     <div shrink hidden sm:block mt-4 />
-    <NavSideItem :text="$t('nav.settings')" to="/settings" icon="i-ri:settings-3-line" :command="command" />
+    <NavSideItem :text="$t('nav_settings')" to="/settings" icon="i-ri:settings-3-line" :command="command" />
   </nav>
 </template>

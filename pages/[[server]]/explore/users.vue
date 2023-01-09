@@ -1,11 +1,11 @@
 <script lang="ts" setup>
-const { t } = useI18n()
+const { $t } = useFluent()
 
 // limit: 20 is the default configuration of the official client
 const paginator = useMasto().v2.suggestions.list({ limit: 20 })
 
 useHeadFixed({
-  title: () => `${t('tab.for_you')} | ${t('nav.explore')}`,
+  title: () => `${$t('tab_for_you')} | ${$t('nav_explore')}`,
 })
 </script>
 

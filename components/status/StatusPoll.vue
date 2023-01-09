@@ -44,7 +44,7 @@ const votersCount = $computed(() => poll.votersCount ?? 0)
         {{ option.title }}
       </label>
       <button btn-solid>
-        {{ $t('action.vote') }}
+        {{ $t('action_vote') }}
       </button>
     </form>
     <template v-else>
@@ -63,12 +63,12 @@ const votersCount = $computed(() => poll.votersCount ?? 0)
     </template>
     <div text-sm flex="~ inline" gap-x-1>
       <CommonLocalizedNumber
-        keypath="status.poll.count"
+        keypath="status_poll.count"
         :count="poll.votesCount"
       />
       &middot;
       <CommonTooltip :content="expiredTimeFormatted" class="inline-block" placement="right">
-        <time :datetime="poll.expiresAt!">{{ $t(poll.expired ? 'status.poll.finished' : 'status.poll.ends', [expiredTimeAgo]) }}</time>
+        <time :datetime="poll.expiresAt!">{{ $t(poll.expired ? 'status_poll_finished' : 'status_poll_ends', { date: expiredTimeAgo }) }}</time>
       </CommonTooltip>
     </div>
   </div>

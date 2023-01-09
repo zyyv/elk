@@ -1,8 +1,8 @@
 <script setup lang="ts">
-const { t } = useI18n()
+const { $t } = useFluent()
 
 useHeadFixed({
-  title: () => `${t('settings.language.label')} | ${t('nav.settings')}`,
+  title: () => `${$t('settings_language_label')} | ${$t('nav_settings')}`,
 })
 </script>
 
@@ -10,12 +10,12 @@ useHeadFixed({
   <MainContent back-on-small-screen>
     <template #title>
       <div text-lg font-bold flex items-center gap-2 @click="$scrollToTop">
-        <span>{{ $t('settings.language.label') }}</span>
+        <span>{{ $t('settings_language_label') }}</span>
       </div>
     </template>
     <div p6>
       <label space-y-2>
-        <p font-medium>{{ $t('settings.language.display_language') }}</p>
+        <p font-medium>{{ $t('settings_language_display_language') }}</p>
         <SettingsLanguage select-settings />
       </label>
     </div>

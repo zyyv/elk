@@ -4,7 +4,7 @@ const handle = $(computedEager(() => params.account as string))
 
 definePageMeta({ name: 'account-index' })
 
-const { t } = useI18n()
+const { $t } = useFluent()
 
 const account = await fetchAccountByHandle(handle)
 
@@ -12,7 +12,7 @@ const paginator = useMasto().v1.accounts.listStatuses(account.id, { limit: 30, e
 
 if (account) {
   useHeadFixed({
-    title: () => `${t('account.posts')} | ${getDisplayName(account)} (@${account.acct})`,
+    title: () => `${$t('account_posts')} | ${getDisplayName(account)} (@${account.acct})`,
   })
 }
 </script>

@@ -28,13 +28,13 @@ const isLegacyAccount = computed(() => !currentUser.value?.vapidKey)
   >
     <header flex items-center pb-2>
       <h2 id="notifications-warning" text-md font-bold w-full>
-        {{ $t('settings.notifications.push_notifications.warning.enable_title') }}
+        {{ $t('settings_notifications_push_notifications_warning_enable_title') }}
       </h2>
       <button
         v-if="closeableHeader"
         flex rounded-4
         type="button"
-        :title="$t('settings.notifications.push_notifications.warning.enable_close')"
+        :title="$t('settings_notifications_push_notifications_warning_enable_close')"
         hover:bg-active cursor-pointer transition-100
         :disabled="busy"
         @click="$emit('hide')"
@@ -44,20 +44,20 @@ const isLegacyAccount = computed(() => !currentUser.value?.vapidKey)
     </header>
     <template v-if="closeableHeader">
       <p xl:hidden>
-        {{ $t('settings.notifications.push_notifications.warning.enable_description') }}
+        {{ $t('settings_notifications_push_notifications_warning_enable_description') }}
       </p>
       <p xl:hidden>
-        {{ $t('settings.notifications.push_notifications.warning.enable_description_mobile') }}
+        {{ $t('settings_notifications_push_notifications_warning_enable_description_mobile') }}
       </p>
       <p :class="xl ? null : 'hidden'">
-        {{ $t('settings.notifications.push_notifications.warning.enable_description_desktop') }}
+        {{ $t('settings_notifications_push_notifications_warning_enable_description_desktop') }}
       </p>
     </template>
     <p v-else>
-      {{ $t('settings.notifications.push_notifications.warning.enable_description_settings') }}
+      {{ $t('settings_notifications_push_notifications_warning_enable_description_settings') }}
     </p>
     <p v-if="isLegacyAccount">
-      {{ $t('settings.notifications.push_notifications.warning.re_auth') }}
+      {{ $t('settings_notifications_push_notifications_warning_re_auth') }}
     </p>
     <button
       btn-outline rounded-full font-bold py4 flex="~ gap2 center" m5
@@ -67,7 +67,7 @@ const isLegacyAccount = computed(() => !currentUser.value?.vapidKey)
       @click="$emit('subscribe')"
     >
       <span aria-hidden="true" :class="busy && animate ? 'i-ri:loader-2-fill animate-spin' : 'i-ri:check-line'" />
-      <span>{{ $t('settings.notifications.push_notifications.warning.enable_desktop') }}</span>
+      <span>{{ $t('settings_notifications_push_notifications_warning_enable_desktop') }}</span>
     </button>
     <slot name="error" />
   </div>

@@ -6,8 +6,6 @@ definePageMeta({
 const params = useRoute().params
 const accountName = $(computedEager(() => toShortHandle(params.account as string)))
 
-const { t } = useI18n()
-
 const { data: account, pending, refresh } = $(await useAsyncData(() => fetchAccountByHandle(accountName).catch(() => null), { watch: [isMastoInitialised], immediate: isMastoInitialised.value }))
 const relationship = $computed(() => account ? useRelationship(account).value : undefined)
 
@@ -21,7 +19,7 @@ onReactivated(() => {
 <template>
   <MainContent back>
     <template #title>
-      <ContentRich timeline-title-style :content="account ? getDisplayName(account) : t('nav.profile')" />
+      <ContentRich timeline-title-style :content="account ? getDisplayName(account) : $t('nav_profile')" />
     </template>
 
     <template v-if="pending" />
@@ -31,17 +29,17 @@ onReactivated(() => {
 
       <div v-if="relationship?.blockedBy" h-30 flex="~ col center gap-2">
         <div text-secondary>
-          {{ $t('account.profile_unavailable') }}
+          {{ $t('account_profile_unavailable') }}
         </div>
         <div text-secondary-light text-sm>
-          {{ $t('account.blocked_by') }}
+          {{ $t('account_blocked_by') }}
         </div>
       </div>
       <NuxtPage v-else />
     </template>
 
     <CommonNotFound v-else>
-      {{ $t('error.account_not_found', [`@${accountName}`]) }}
+      {{ $t('error_account_not_found', { username: `@${accountName}` }) }}
     </CommonNotFound>
   </MainContent>
 </template>

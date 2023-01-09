@@ -1,12 +1,12 @@
 <script setup lang="ts">
 import type { AriaAnnounceType, AriaLive } from '~/composables/aria'
-import type { LocaleObject } from '#i18n'
+import { locale, locales } from '~/config/i18n'
 
 const router = useRouter()
-const { t, locale, locales } = useI18n()
+const { $t } = useFluent()
 const { ariaAnnouncer, announce } = useAriaAnnouncer()
 
-const localeMap = (locales.value as LocaleObject[]).reduce((acc, l) => {
+const localeMap = locales.reduce((acc, l) => {
   acc[l.code!] = l.name!
   return acc
 }, {} as Record<string, string>)
@@ -25,9 +25,9 @@ const onMessage = (event: AriaAnnounceType, message?: string) => {
 
 watch(locale, (l, ol) => {
   if (ol) {
-    announce(t('a11y.locale_changing', [localeMap[ol] ?? ol]))
+    announce($t('a11y_locale_changing', { lang: localeMap[ol] ?? ol }))
     setTimeout(() => {
-      announce(t('a11y.locale_changed', [localeMap[l] ?? l]))
+      announce($t('a11y_locale_changed', { lang: localeMap[l] ?? l }))
     }, 1000)
   }
 }, { immediate: true })
@@ -35,13 +35,13 @@ watch(locale, (l, ol) => {
 onMounted(() => {
   ariaAnnouncer.on(onMessage)
   router.beforeEach(() => {
-    announce(t('a11y.loading_page'))
+    announce($t('a11y_loading_page'))
   })
   router.afterEach((to, from) => {
     from && setTimeout(() => {
       requestAnimationFrame(() => {
         const title = document.title.trim().split('|')
-        announce(t('a11y.route_loaded', [title[0]]))
+        announce($t('a11y_route_loaded', { title: title[0] }))
       })
     }, 512)
   })

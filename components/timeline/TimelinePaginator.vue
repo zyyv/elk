@@ -13,7 +13,6 @@ const { paginator, stream, account, buffer = 10 } = defineProps<{
   buffer?: number
 }>()
 
-const { formatNumber } = useHumanReadableNumber()
 const virtualScroller = $(useFeatureFlag('experimentalVirtualScroller'))
 
 const showOriginSite = $computed(() =>
@@ -25,7 +24,7 @@ const showOriginSite = $computed(() =>
   <CommonPaginator v-bind="{ paginator, stream, preprocess, buffer }" :virtual-scroller="virtualScroller">
     <template #updater="{ number, update }">
       <button py-4 border="b base" flex="~ col" p-3 w-full text-primary font-bold @click="update">
-        {{ $t('timeline.show_new_items', number, { named: { v: formatNumber(number) } }) }}
+        {{ $t('timeline_show_new_items', { count: number }) }}
       </button>
     </template>
     <template #default="{ item, older, newer, active }">
@@ -40,14 +39,14 @@ const showOriginSite = $computed(() =>
     </template>
     <template v-if="context === 'account' && showOriginSite" #done>
       <div p5 text-secondary text-center flex flex-col items-center gap1>
-        <span italic>{{ $t('timeline.view_older_posts') }}</span>
+        <span italic>{{ $t('timeline_view_older_posts') }}</span>
         <a
           :href="account!.url" target="_blank"
           flex="~ gap-1" items-center text-primary
           hover="underline text-primary-active"
         >
           <div i-ri:external-link-fill />
-          {{ $t('menu.open_in_original_site') }}
+          {{ $t('menu_open_in_original_site') }}
         </a>
       </div>
     </template>

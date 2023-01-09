@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import { useI18n } from 'vue-i18n'
+import { useFluent } from 'fluent-vue'
 
-const { t } = useI18n()
+const { $t } = useFluent()
 useHeadFixed({
-  title: () => t('nav.search'),
+  title: () => $t('nav_search'),
 })
 </script>
 
@@ -12,7 +12,7 @@ useHeadFixed({
     <template #title>
       <NuxtLink to="/search" timeline-title-style flex items-center gap-2 @click="$scrollToTop">
         <div i-ri:search-line class="rtl-flip" />
-        <span>{{ $t('nav.search') }}</span>
+        <span>{{ $t('nav_search') }}</span>
       </NuxtLink>
     </template>
 

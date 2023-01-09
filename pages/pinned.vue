@@ -3,10 +3,10 @@ definePageMeta({
   middleware: 'auth',
 })
 
-const { t } = useI18n()
+const { $t } = useFluent()
 
 useHeadFixed({
-  title: () => t('account.pinned'),
+  title: () => $t('account_pinned'),
 })
 </script>
 
@@ -15,7 +15,7 @@ useHeadFixed({
     <template #title>
       <NuxtLink to="/public/pinned" timeline-title-style flex items-center gap-2 @click="$scrollToTop">
         <div i-ri:pushpin-line />
-        <span>{{ t('account.pinned') }}</span>
+        <span>{{ $t('account_pinned') }}</span>
       </NuxtLink>
     </template>
 

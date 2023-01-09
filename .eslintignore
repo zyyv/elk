@@ -3,5 +3,6 @@
 *.ico
 *.toml
 *.patch
+*.ftl
 https-dev-config/localhost.crt
 https-dev-config/localhost.key

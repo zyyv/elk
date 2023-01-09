@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import { STORAGE_KEY_HIDE_EXPLORE_TAGS_TIPS } from '~~/constants'
 
-const { t } = useI18n()
+const { $t } = useFluent()
 
 const masto = useMasto()
 const paginator = masto.v1.trends.listTags({
@@ -11,13 +11,13 @@ const paginator = masto.v1.trends.listTags({
 const hideTagsTips = useLocalStorage(STORAGE_KEY_HIDE_EXPLORE_TAGS_TIPS, false)
 
 useHeadFixed({
-  title: () => `${t('tab.hashtags')} | ${t('nav.explore')}`,
+  title: () => `${$t('tab_hashtags')} | ${$t('nav_explore')}`,
 })
 </script>
 
 <template>
   <CommonAlert v-if="!hideTagsTips" @close="hideTagsTips = true">
-    <p>{{ $t('tooltip.explore_tags_intro') }}</p>
+    <p>{{ $t('tooltip_explore_tags_intro') }}</p>
   </CommonAlert>
 
   <TagCardPaginator v-bind="{ paginator }" />

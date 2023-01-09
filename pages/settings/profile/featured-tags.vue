@@ -3,10 +3,10 @@ definePageMeta({
   middleware: 'auth',
 })
 
-const { t } = useI18n()
+const { $t } = useFluent()
 
 useHeadFixed({
-  title: () => `${t('settings.profile.featured_tags.label')} | ${t('nav.settings')}`,
+  title: () => `${$t('settings_profile_featured_tags_label')} | ${$t('nav_settings')}`,
 })
 </script>
 
@@ -15,7 +15,7 @@ useHeadFixed({
     <template #title>
       <div text-lg font-bold flex items-center gap-2 @click="$scrollToTop">
         <div i-ri:test-tube-line />
-        <span>{{ $t('settings.profile.featured_tags.label') }}</span>
+        <span>{{ $t('settings_profile_featured_tags_label') }}</span>
       </div>
     </template>
     <div text-center mt-10>
@@ -23,7 +23,7 @@ useHeadFixed({
         🚧
       </h1>
       <h3 text-xl>
-        {{ $t('settings.profile.featured_tags.label') }}
+        {{ $t('settings_profile_featured_tags_label') }}
       </h3>
     </div>
   </MainContent>

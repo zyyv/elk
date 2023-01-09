@@ -17,7 +17,7 @@ const chooseVisibility = (visibility: string) => {
 </script>
 
 <template>
-  <CommonTooltip placement="top" :content="editing ? $t(`visibility.${currentVisibility.value}`) : $t('tooltip.change_content_visibility')">
+  <CommonTooltip placement="top" :content="editing ? $t(`visibility.${currentVisibility.value}`) : $t('tooltip_change_content_visibility')">
     <CommonDropdown placement="bottom">
       <slot :visibility="currentVisibility" />
       <template #popper>
@@ -25,8 +25,8 @@ const chooseVisibility = (visibility: string) => {
           v-for="visibility in statusVisibilities"
           :key="visibility.value"
           :icon="visibility.icon"
-          :text="$t(`visibility.${visibility.value}`)"
-          :description="$t(`visibility.${visibility.value}_desc`)"
+          :text="$t(`visibility_${visibility.value}`)"
+          :description="$t(`visibility_${visibility.value}_desc`)"
           :checked="visibility.value === modelValue"
           @click="chooseVisibility(visibility.value)"
         />

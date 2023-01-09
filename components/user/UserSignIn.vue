@@ -109,11 +109,11 @@ onClickOutside($$(input), () => {
     <div flex="~ center" items-end mb2 gap-x-2>
       <img src="/logo.svg" w-12 h-12 mxa height="48" width="48" :alt="$t('app_logo')" class="rtl-flip">
       <div text-3xl>
-        {{ $t('action.sign_in') }}
+        {{ $t('action_sign_in') }}
       </div>
     </div>
     <div>
-      {{ $t('user.server_address_label') }}
+      {{ $t('user_server_address_label') }}
     </div>
     <div :class="error ? 'animate animate-shake-x animate-delay-100' : null">
       <div
@@ -166,7 +166,7 @@ onClickOutside($$(input), () => {
       <div min-h-4>
         <Transition css enter-active-class="animate animate-fade-in">
           <p v-if="displayError" role="alert" p-0 m-0 text-xs text-red-600 dark:text-red-400>
-            {{ $t('error.sign_in_error') }}
+            {{ $t('error_sign_in_error') }}
           </p>
         </Transition>
       </div>
@@ -175,13 +175,13 @@ onClickOutside($$(input), () => {
       <div i-ri:lightbulb-line me-1 />
       <span>
         <i18n-t keypath="user.tip_no_account">
-          <a href="https://joinmastodon.org/servers" target="_blank" hover="underline text-primary">{{ $t('user.tip_register_account') }}</a>
+          <a href="https://joinmastodon.org/servers" target="_blank" hover="underline text-primary">{{ $t('user_tip_register_account') }}</a>
         </i18n-t>
       </span>
     </div>
     <button flex="~ row" gap-x-2 items-center btn-solid mt2 :disabled="!server || busy">
       <span aria-hidden="true" inline-block :class="busy ? 'i-ri:loader-2-fill animate animate-spin' : 'i-ri:login-circle-line'" class="rtl-flip" />
-      {{ $t('action.sign_in') }}
+      {{ $t('action_sign_in') }}
     </button>
   </form>
 </template>

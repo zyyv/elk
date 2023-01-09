@@ -29,7 +29,7 @@ const toggleApply = () => {
     <div absolute right-2 top-2>
       <div
         v-if="removable"
-        :aria-label="$t('attachment.remove_label')"
+        :aria-label="$t('attachment_remove_label')"
         hover:bg="gray/40" transition-100 p-1 rounded-5 cursor-pointer
         :class="[isHydrated && isSmallScreen ? '' : 'op-0 group-hover:op-100hover:']"
         mix-blend-difference
@@ -40,7 +40,7 @@ const toggleApply = () => {
     </div>
     <div absolute right-2 bottom-2>
       <button class="bg-black/75" text-white px2 py1 rounded-2 @click="isEditDialogOpen = true">
-        {{ $t('action.edit') }}
+        {{ $t('action_edit') }}
       </button>
     </div>
     <ModalDialog
@@ -52,16 +52,16 @@ const toggleApply = () => {
       <div flex flex-col-reverse gap-5 md:flex-row>
         <div flex flex-col gap-2 justify-between>
           <h1 id="edit-attachment" font-bold>
-            {{ $t('attachment.edit_title') }}
+            {{ $t('attachment_edit_title') }}
           </h1>
           <div flex flex-col gap-2>
             <textarea v-model="description" p-3 h-50 bg-base rounded-2 border-strong border-1 md:w-100 />
             <button btn-outline @click="toggleApply">
-              {{ $t('action.apply') }}
+              {{ $t('action_apply') }}
             </button>
           </div>
           <button btn-outline @click="isEditDialogOpen = false">
-            {{ $t('action.close') }}
+            {{ $t('action_close') }}
           </button>
         </div>
         <StatusAttachment :attachment="attachment" w-full />

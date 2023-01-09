@@ -6,7 +6,7 @@ const { account } = defineProps<{
   command?: boolean
 }>()
 
-const { t } = useI18n()
+const { $t } = useFluent()
 
 const createdAt = $(useFormattedDateTime(() => account.createdAt, {
   month: 'long',
@@ -18,7 +18,7 @@ const namedFields = ref<mastodon.v1.AccountField[]>([])
 const iconFields = ref<mastodon.v1.AccountField[]>([])
 
 function getFieldIconTitle(fieldName: string) {
-  return fieldName === 'Joined' ? t('account.joined') : fieldName
+  return fieldName === 'Joined' ? $t('account_joined') : fieldName
 }
 
 function previewHeader() {
@@ -26,7 +26,7 @@ function previewHeader() {
     id: `${account.acct}:header`,
     type: 'image',
     previewUrl: account.header,
-    description: t('account.profile_description', [account.username]),
+    description: $t('account_profile_description', { username: account.username }),
   }])
 }
 
@@ -35,7 +35,7 @@ function previewAvatar() {
     id: `${account.acct}:avatar`,
     type: 'image',
     previewUrl: account.avatar,
-    description: t('account.avatar_description', [account.username]),
+    description: $t('account_avatar_description', { username: account.username }),
   }])
 }
 
@@ -65,7 +65,7 @@ const isSelf = $computed(() => currentUser.value?.account.id === account.id)
 <template>
   <div flex flex-col>
     <button border="b base" z-1>
-      <img h-50 height="200" w-full object-cover :src="account.header" :alt="t('account.profile_description', [account.username])" @click="previewHeader">
+      <img h-50 height="200" w-full object-cover :src="account.header" :alt="$t('account_profile_description', { username: account.username })" @click="previewHeader">
     </button>
     <div p4 mt--18 flex flex-col gap-4>
       <div relative>
@@ -91,7 +91,7 @@ const isSelf = $computed(() => currentUser.value?.account.id === account.id)
             gap-1 items-center border="1" rounded-full flex="~ gap2 center" font-500 min-w-30 h-fit px3 py1
             hover="border-primary text-primary bg-active"
           >
-            {{ $t('settings.profile.appearance.title') }}
+            {{ $t('settings_profile_appearance_title') }}
           </NuxtLink>
           <!-- <button flex gap-1 items-center w-full rounded op75 hover="op100 text-purple" group>
             <div rounded p2 group-hover="bg-rose/10">

@@ -22,7 +22,7 @@ const {
 const clipboard = useClipboard()
 const router = useRouter()
 const route = useRoute()
-const { t } = useI18n()
+const { $t } = useFluent()
 
 const isAuthor = $computed(() => status.account.id === currentUser.value?.account.id)
 
@@ -62,9 +62,9 @@ const shareLink = async (status: mastodon.v1.Status) => {
 
 const deleteStatus = async () => {
   if (await openConfirmDialog({
-    title: t('menu.delete_confirm.title'),
-    confirm: t('menu.delete_confirm.confirm'),
-    cancel: t('menu.delete_confirm.cancel'),
+    title: $t('menu_delete_confirm_title'),
+    confirm: $t('menu_delete_confirm_confirm'),
+    cancel: $t('menu_delete_confirm_cancel'),
   }) !== 'confirm')
     return
 
@@ -120,7 +120,7 @@ const showFavoritedAndBoostedBy = () => {
 <template>
   <CommonDropdown flex-none ms3 placement="bottom" :eager-mount="command">
     <StatusActionButton
-      :content="$t('action.more')"
+      :content="$t('action_more')"
       color="text-purple"
       hover="text-purple"
       group-hover="bg-purple/10"
@@ -132,14 +132,14 @@ const showFavoritedAndBoostedBy = () => {
       <div flex="~ col">
         <template v-if="userSettings.zenMode">
           <CommonDropdownItem
-            :text="$t('action.reply')"
+            :text="$t('action_reply')"
             icon="i-ri:chat-1-line"
             :command="command"
             @click="reply()"
           />
 
           <CommonDropdownItem
-            :text="status.reblogged ? $t('action.boosted') : $t('action.boost')"
+            :text="status.reblogged ? $t('action_boosted') : $t('action_boost')"
             icon="i-ri:repeat-fill"
             :class="status.reblogged ? 'text-green' : ''"
             :command="command"
@@ -148,7 +148,7 @@ const showFavoritedAndBoostedBy = () => {
           />
 
           <CommonDropdownItem
-            :text="status.favourited ? $t('action.favourited') : $t('action.favourite')"
+            :text="status.favourited ? $t('action_favourited') : $t('action_favourite')"
             :icon="status.favourited ? 'i-ri:heart-3-fill' : 'i-ri:heart-3-line'"
             :class="status.favourited ? 'text-rose' : ''"
             :command="command"
@@ -157,7 +157,7 @@ const showFavoritedAndBoostedBy = () => {
           />
 
           <CommonDropdownItem
-            :text="status.bookmarked ? $t('action.bookmarked') : $t('action.bookmark')"
+            :text="status.bookmarked ? $t('action_bookmarked') : $t('action_bookmark')"
             :icon="status.bookmarked ? 'i-ri:bookmark-fill' : 'i-ri:bookmark-line'"
             :class="status.bookmarked ? 'text-yellow' : ''"
             :command="command"
@@ -167,14 +167,21 @@ const showFavoritedAndBoostedBy = () => {
         </template>
 
         <CommonDropdownItem
-          :text="$t('menu.show_favourited_and_boosted_by')"
+          :text="$t('menu_show_favourited_and_boosted_by')"
           icon="i-ri:hearts-line"
           :command="command"
           @click="showFavoritedAndBoostedBy()"
         />
 
         <CommonDropdownItem
-          :text="$t('menu.copy_link_to_post')"
+          :text="$t('menu_show_favourited_and_boosted_by')"
+          icon="i-ri:hearts-line"
+          :command="command"
+          @click="showFavoritedAndBoostedBy()"
+        />
+
+        <CommonDropdownItem
+          :text="$t('menu_copy_link_to_post')"
           icon="i-ri:link"
           :command="command"
           @click="copyLink(status)"
@@ -182,7 +189,7 @@ const showFavoritedAndBoostedBy = () => {
 
         <CommonDropdownItem
           v-if="isShareSupported"
-          :text="$t('menu.share_post')"
+          :text="$t('menu_share_post')"
           icon="i-ri:share-line"
           :command="command"
           @click="shareLink(status)"
@@ -190,7 +197,7 @@ const showFavoritedAndBoostedBy = () => {
 
         <CommonDropdownItem
           v-if="currentUser && (status.account.id === currentUser.account.id || status.mentions.some(m => m.id === currentUser!.account.id))"
-          :text="status.muted ? $t('menu.unmute_conversation') : $t('menu.mute_conversation')"
+          :text="status.muted ? $t('menu_unmute_conversation') : $t('menu_mute_conversation')"
           :icon="status.muted ? 'i-ri:eye-line' : 'i-ri:eye-off-line'"
           :command="command"
           :disabled="isLoading.muted"
@@ -199,7 +206,7 @@ const showFavoritedAndBoostedBy = () => {
 
         <NuxtLink v-if="status.url" :to="status.url" external target="_blank">
           <CommonDropdownItem
-            :text="$t('menu.open_in_original_site')"
+            :text="$t('menu_open_in_original_site')"
             icon="i-ri:arrow-right-up-line"
             :command="command"
           />
@@ -207,7 +214,7 @@ const showFavoritedAndBoostedBy = () => {
 
         <CommonDropdownItem
           v-if="isTranslationEnabled && status.language !== languageCode"
-          :text="translation.visible ? $t('menu.show_untranslated') : $t('menu.translate_post')"
+          :text="translation.visible ? $t('menu_show_untranslated') : $t('menu_translate_post')"
           icon="i-ri:translate"
           :command="command"
           @click="toggleTranslation"
@@ -216,21 +223,21 @@ const showFavoritedAndBoostedBy = () => {
         <template v-if="isMastoInitialised && currentUser">
           <template v-if="isAuthor">
             <CommonDropdownItem
-              :text="status.pinned ? $t('menu.unpin_on_profile') : $t('menu.pin_on_profile')"
+              :text="status.pinned ? $t('menu_unpin_on_profile') : $t('menu_pin_on_profile')"
               icon="i-ri:pushpin-line"
               :command="command"
               @click="togglePin"
             />
 
             <CommonDropdownItem
-              :text="$t('menu.edit')"
+              :text="$t('menu_edit')"
               icon="i-ri:edit-line"
               :command="command"
               @click="editStatus"
             />
 
             <CommonDropdownItem
-              :text="$t('menu.delete')"
+              :text="$t('menu_delete')"
               icon="i-ri:delete-bin-line"
               text-red-600
               :command="command"
@@ -238,7 +245,7 @@ const showFavoritedAndBoostedBy = () => {
             />
 
             <CommonDropdownItem
-              :text="$t('menu.delete_and_redraft')"
+              :text="$t('menu_delete_and_redraft')"
               icon="i-ri:eraser-line"
               text-red-600
               :command="command"
@@ -247,7 +254,7 @@ const showFavoritedAndBoostedBy = () => {
           </template>
           <template v-else>
             <CommonDropdownItem
-              :text="$t('menu.mention_account', [`@${status.account.acct}`])"
+              :text="$t('menu_mention_account', { account: `@${status.account.acct}` })"
               icon="i-ri:at-line"
               :command="command"
               @click="mentionUser(status.account)"

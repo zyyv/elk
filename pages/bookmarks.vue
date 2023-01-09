@@ -3,10 +3,10 @@ definePageMeta({
   middleware: 'auth',
 })
 
-const { t } = useI18n()
+const { $t } = useFluent()
 
 useHeadFixed({
-  title: () => t('nav.bookmarks'),
+  title: () => $t('nav_bookmarks'),
 })
 </script>
 
@@ -15,7 +15,7 @@ useHeadFixed({
     <template #title>
       <NuxtLink to="/bookmarks" timeline-title-style flex items-center gap-2 @click="$scrollToTop">
         <div i-ri:bookmark-line />
-        <span>{{ t('nav.bookmarks') }}</span>
+        <span>{{ $t('nav_bookmarks') }}</span>
       </NuxtLink>
     </template>
 

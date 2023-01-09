@@ -1,31 +1,63 @@
+import { FluentBundle, FluentResource } from '@fluent/bundle'
+import type { FluentValue } from '@fluent/bundle'
 import { readFile } from 'fs-extra'
 import { resolve } from 'pathe'
 import type { ManifestOptions } from 'vite-plugin-pwa'
 import { getEnv } from '../../config/env'
-import { i18n } from '../../config/i18n'
-import type { LocaleObject } from '#i18n'
+import { defaultLocale, locales } from '../../config/i18n'
 
 export type LocalizedWebManifest = Record<string, Partial<ManifestOptions>>
-
-export const pwaLocales = i18n.locales as LocaleObject[]
 
 type WebManifestEntry = Pick<ManifestOptions, 'name' | 'short_name' | 'description'>
 type RequiredWebManifestEntry = Required<WebManifestEntry & Pick<ManifestOptions, 'dir' | 'lang'>>
 
+async function readBundle(locale: string): Promise<FluentBundle> {
+  const messages = Buffer.from(
+    await readFile(resolve(`./locales/${locale}.ftl`), 'utf-8'),
+  ).toString()
+
+  const bundle = new FluentBundle(locale)
+  bundle.addResource(new FluentResource(messages))
+  return bundle
+}
+
+function format(bundle: FluentBundle, key: string, values: Record<string, FluentValue>): string | undefined {
+  const message = bundle.getMessage(key)
+  if (!message || !message.value)
+    return undefined
+
+  return bundle.formatPattern(message.value, values)
+}
+
+export const pwaLocales = locales
+
 export const createI18n = async (): Promise<LocalizedWebManifest> => {
   const { env } = await getEnv()
   const envName = `${env === 'release' ? '' : `(${env})`}`
-  const { pwa } = await readI18nFile('en-US.json')
+  const defaultBundle = await readBundle(defaultLocale)
 
-  const defaultManifest: Required<WebManifestEntry> = pwa.webmanifest[env]
+  const defaultManifest: Required<WebManifestEntry> = {
+    name: format(defaultBundle, 'pwa_webmanifest_name', { env: envName })!,
+    short_name: format(defaultBundle, 'pwa_webmanifest_short_name', { env: envName })!,
+    description: format(defaultBundle, 'pwa_webmanifest_name_description', { env: envName })!,
+  }
 
   const locales: RequiredWebManifestEntry[] = await Promise.all(
     pwaLocales
       .filter(l => l.code !== 'en-US')
-      .map(async ({ code, dir = 'ltr', file }) => {
+      .map(async ({ code, dir = 'ltr' }) => {
         // read locale file
-        const { pwa, app_name, app_desc_short } = await readI18nFile(file!)
-        const entry: WebManifestEntry = pwa?.webmanifest?.[env] ?? {}
+        const bundle = await readBundle(code)
+
+        const app_name = format(bundle, 'app_name', { env: envName })
+        const app_desc_short = format(bundle, 'app_desc_short', { env: envName })
+
+        const entry: Partial<WebManifestEntry> = {
+          name: format(bundle, 'pwa_webmanifest_name', { env: envName }),
+          short_name: format(bundle, 'pwa_webmanifest_short_name', { env: envName }),
+          description: format(bundle, 'pwa_webmanifest_name_description', { env: envName }),
+        }
+
         if (!entry.name && app_name)
           entry.name = dir === 'rtl' ? `${envName} ${app_name}` : `${app_name} ${envName}`
 
@@ -77,10 +109,4 @@ export const createI18n = async (): Promise<LocalizedWebManifest> => {
 
     return acc
   }, {} as LocalizedWebManifest)
-}
-
-async function readI18nFile(file: string) {
-  return JSON.parse(Buffer.from(
-    await readFile(resolve(`./locales/${file}`), 'utf-8'),
-  ).toString())
 }

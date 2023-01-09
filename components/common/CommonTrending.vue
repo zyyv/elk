@@ -18,6 +18,6 @@ const people = $computed(() =>
 
 <template>
   <p>
-    {{ $t('command.n-people-in-the-past-n-days', [people, maxDay]) }}
+    {{ $t('command_n-people-in-the-past-n-days', { count: people, days: maxDay }) }}
   </p>
 </template>

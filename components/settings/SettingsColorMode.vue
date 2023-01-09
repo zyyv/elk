@@ -17,7 +17,7 @@ function setColorMode(mode: ColorMode) {
       @click="setColorMode('dark')"
     >
       <div i-ri:moon-line />
-      {{ $t('settings.interface.dark_mode') }}
+      {{ $t('settings_interface_dark_mode') }}
     </button>
     <button
       btn-text flex-1 flex="~ gap-1 center" p4 border="~ base rounded" bg-base
@@ -26,7 +26,7 @@ function setColorMode(mode: ColorMode) {
       @click="setColorMode('light')"
     >
       <div i-ri:sun-line />
-      {{ $t('settings.interface.light_mode') }}
+      {{ $t('settings_interface_light_mode') }}
     </button>
   </div>
 </template>

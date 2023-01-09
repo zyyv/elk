@@ -9,7 +9,7 @@ const fontSize = useFontSizeRef()
 <template>
   <select v-model="fontSize">
     <option v-for="size in sizes" :key="size" :value="size" :selected="fontSize === size">
-      {{ `${$t(`settings.interface.size_label.${size}`)}${size === DEFAULT_FONT_SIZE ? $t('settings.interface.default') : ''}` }}
+      {{ `${$t(`settings_interface_size_label_${size}`)}${size === DEFAULT_FONT_SIZE ? ` ${$t('settings_interface_default')}` : ''}` }}
     </option>
   </select>
 </template>

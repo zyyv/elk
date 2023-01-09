@@ -1,5 +1,5 @@
 <script setup lang="ts">
-const { t } = useI18n()
+const { $t } = useFluent()
 const params = useRoute().params
 const handle = $(computedEager(() => params.account as string))
 
@@ -10,7 +10,7 @@ const paginator = account ? useMasto().v1.accounts.listFollowers(account.id, {})
 
 if (account) {
   useHeadFixed({
-    title: () => `${t('account.followers')} | ${getDisplayName(account)} (@${account})`,
+    title: () => `${$t('account_followers')} | ${getDisplayName(account)} (@${account})`,
   })
 }
 </script>

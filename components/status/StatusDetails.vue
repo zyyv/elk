@@ -19,10 +19,10 @@ const createdAt = useFormattedDateTime(status.createdAt)
 
 const visibility = $computed(() => statusVisibilities.find(v => v.value === status.visibility)!)
 
-const { t } = useI18n()
+const { $t } = useFluent()
 
 useHeadFixed({
-  title: () => `${status.account.displayName || status.account.acct} ${t('common.in')} ${t('app_name')}: "${removeHTMLTags(status.content) || ''}"`,
+  title: () => `${status.account.displayName || status.account.acct} ${$t('common_in')} ${$t('app_name')}: "${removeHTMLTags(status.content) || ''}"`,
 })
 
 const isDM = $computed(() => status.visibility === 'direct')
@@ -44,7 +44,7 @@ const isDM = $computed(() => status.visibility === 'direct')
           :status="status"
           :inline="false"
         >
-          <span ms1 font-bold cursor-pointer>{{ $t('state.edited') }}</span>
+          <span ms1 font-bold cursor-pointer>{{ $t('state_edited') }}</span>
         </StatusEditIndicator>
       </div>
       <div>&middot;</div>

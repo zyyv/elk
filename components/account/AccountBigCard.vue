@@ -18,7 +18,7 @@ defineOptions({
     <!-- Banner -->
     <div px2 pt2>
       <div rounded of-hidden bg="gray-500/20" aspect="3.19">
-        <img h-full w-full object-cover :src="account.header" :alt="$t('account.profile_description', [account.username])">
+        <img h-full w-full object-cover :src="account.header" :alt="$t('account_profile_description', { username: account.username })">
       </div>
     </div>
     <div px-4 pb-4 space-y-2>

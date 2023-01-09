@@ -18,7 +18,7 @@ const lang = $computed(() => {
       <div i-ri:user-follow-fill me-3 color-primary aria-hidden="true" />
       <template v-if="count > 1">
         <CommonLocalizedNumber
-          keypath="notification.followed_you_count"
+          keypath="notification_followed_you_count"
           :count="count"
         />
       </template>
@@ -28,7 +28,7 @@ const lang = $computed(() => {
           text-primary me-1 font-bold line-clamp-1 ws-pre-wrap break-all
         />
         <span me-1 ws-nowrap>
-          {{ $t('notification.followed_you') }}
+          {{ $t('notification_followed_you') }}
         </span>
       </template>
     </div>

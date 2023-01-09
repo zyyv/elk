@@ -8,10 +8,10 @@ definePageMeta({
   middleware: 'auth',
 })
 
-const { t } = useI18n()
+const { $t } = useFluent()
 
 useHeadFixed({
-  title: () => `${t('settings.profile.appearance.title')} | ${t('nav.settings')}`,
+  title: () => `${$t('settings_profile_appearance_title')} | ${$t('nav_settings')}`,
 })
 
 const account = $computed(() => currentUser.value?.account)
@@ -87,7 +87,7 @@ onReactivated(refreshInfo)
   <MainContent back>
     <template #title>
       <div text-lg font-bold flex items-center gap-2 @click="$scrollToTop">
-        <span>{{ $t('settings.profile.appearance.title') }}</span>
+        <span>{{ $t('settings_profile_appearance_title') }}</span>
       </div>
     </template>
 
@@ -137,7 +137,7 @@ onReactivated(refreshInfo)
         <!-- display name -->
         <label space-y-2 block>
           <p font-medium>
-            {{ $t('settings.profile.appearance.display_name') }}
+            {{ $t('settings_profile_appearance_display_name') }}
           </p>
           <input v-model="form.displayName" type="text" input-base>
         </label>
@@ -145,7 +145,7 @@ onReactivated(refreshInfo)
         <!-- note -->
         <label space-y-2 block>
           <p font-medium>
-            {{ $t('settings.profile.appearance.bio') }}
+            {{ $t('settings_profile_appearance_bio') }}
           </p>
           <textarea v-model="form.note" maxlength="500" min-h-10ex input-base />
         </label>
@@ -153,10 +153,10 @@ onReactivated(refreshInfo)
         <!-- metadata -->
         <div space-y-2>
           <div font-medium>
-            {{ $t('settings.profile.appearance.profile_metadata') }}
+            {{ $t('settings_profile_appearance_profile_metadata') }}
           </div>
           <div text-sm text-secondary>
-            {{ $t('settings.profile.appearance.profile_metadata_desc') }}
+            {{ $t('settings_profile_appearance_profile_metadata_desc') }}
           </div>
 
           <SettingsProfileMetadata v-if="isHydrated" v-model:form="form" />
@@ -172,7 +172,7 @@ onReactivated(refreshInfo)
             @click="reset()"
           >
             <div aria-hidden="true" i-ri:eraser-line />
-            {{ $t('action.reset') }}
+            {{ $t('action_reset') }}
           </button>
 
           <button
@@ -185,7 +185,7 @@ onReactivated(refreshInfo)
               aria-hidden="true"
               :class="submitting ? 'i-ri:loader-2-fill animate animate-spin' : 'i-ri:save-line'"
             />
-            {{ $t('action.save') }}
+            {{ $t('action_save') }}
           </button>
         </div>
       </div>

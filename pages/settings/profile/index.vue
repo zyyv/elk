@@ -3,10 +3,10 @@ definePageMeta({
   middleware: 'auth',
 })
 
-const { t } = useI18n()
+const { $t } = useFluent()
 
 useHeadFixed({
-  title: () => `${t('settings.profile.label')} | ${t('nav.settings')}`,
+  title: () => `${$t('settings_profile_label')} | ${$t('nav_settings')}`,
 })
 </script>
 
@@ -14,30 +14,30 @@ useHeadFixed({
   <MainContent back-on-small-screen>
     <template #title>
       <div text-lg font-bold flex items-center gap-2 @click="$scrollToTop">
-        <span>{{ $t('settings.profile.label') }}</span>
+        <span>{{ $t('settings_profile_label') }}</span>
       </div>
     </template>
 
     <SettingsItem
       command large
       icon="i-ri:user-settings-line"
-      :text="$t('settings.profile.appearance.label')"
-      :description="$t('settings.profile.appearance.description')"
+      :text="$t('settings_profile_appearance_label')"
+      :description="$t('settings_profile_appearance_description')"
       to="/settings/profile/appearance"
     />
     <SettingsItem
       command large
       icon="i-ri:hashtag"
-      :text="$t('settings.profile.featured_tags.label')"
-      :description="$t('settings.profile.featured_tags.description')"
+      :text="$t('settings_profile_featured_tags_label')"
+      :description="$t('settings_profile_featured_tags_description')"
       to="/settings/profile/featured-tags"
     />
     <SettingsItem
       v-if="isHydrated && currentUser"
       command large
       icon="i-ri:settings-line"
-      :text="$t('settings.account_settings.label')"
-      :description="$t('settings.account_settings.description')"
+      :text="$t('settings_account_settings_label')"
+      :description="$t('settings_account_settings_description')"
       :to="`https://${currentUser!.server}/auth/edit`"
       external target="_blank"
     />

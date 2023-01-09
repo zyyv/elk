@@ -25,10 +25,10 @@ const toggleFollowTag = async () => {
   <button
     rounded group focus:outline-none
     hover:text-primary focus-visible:text-primary
-    :aria-label="tag.following ? $t('tag.unfollow_label', [tag.name]) : $t('tag.follow_label', [tag.name])"
+    :aria-label="tag.following ? $t('tag_unfollow_label', { tag: tag.name }) : $t('tag_follow_label', { tag: tag.name })"
     @click="toggleFollowTag()"
   >
-    <CommonTooltip placement="bottom" :content="tag.following ? $t('tag.unfollow') : $t('tag.follow')">
+    <CommonTooltip placement="bottom" :content="tag.following ? $t('tag_unfollow') : $t('tag_follow')">
       <div rounded-full p2 group-hover="bg-orange/10" group-focus-visible="bg-orange/10" group-focus-visible:ring="2 current">
         <div :class="[tag.following ? 'i-ri:star-fill' : 'i-ri:star-line']" />
       </div>

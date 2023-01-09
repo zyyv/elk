@@ -1,7 +1,6 @@
 import Inspect from 'vite-plugin-inspect'
 import { isCI, isDevelopment } from 'std-env'
 import { isPreview } from './config/env'
-import { i18n } from './config/i18n'
 import { pwa } from './config/pwa'
 import type { BuildInfo } from './types'
 
@@ -135,7 +134,6 @@ export default defineNuxtConfig({
     },
   },
   colorMode: { classSuffix: '' },
-  i18n,
   pwa,
 })
 

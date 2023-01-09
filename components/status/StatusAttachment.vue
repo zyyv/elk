@@ -179,10 +179,10 @@ useIntersectionObserver(video, (entries) => {
           <div p4 flex flex-col gap-2 max-w-130>
             <div flex justify-between>
               <h2 font-bold text-xl text-secondary>
-                {{ $t('status.img_alt.desc') }}
+                {{ $t('status_img_alt_desc') }}
               </h2>
               <button v-close-popper text-sm btn-outline py0 px2 text-secondary border-base>
-                {{ $t('status.img_alt.dismiss') }}
+                {{ $t('status_img_alt_dismiss') }}
               </button>
             </div>
             <p>

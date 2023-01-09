@@ -40,7 +40,7 @@ const {
       :class="active ? 'opacity-100' : 'opacity-0'"
     >
       <div class="text-xs text-secondary">
-        {{ $t('command.complete') }}
+        {{ $t('command_complete') }}
       </div>
       <CommandKey name="Tab" />
     </div>
@@ -50,7 +50,7 @@ const {
       :class="active ? 'opacity-100' : 'opacity-0'"
     >
       <div class="text-xs text-secondary">
-        {{ $t('command.activate') }}
+        {{ $t('command_activate') }}
       </div>
       <CommandKey name="Enter" />
     </div>

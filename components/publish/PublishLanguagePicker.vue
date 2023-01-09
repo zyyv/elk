@@ -6,7 +6,7 @@ let { modelValue } = $defineModel<{
   modelValue: string
 }>()
 
-const { t } = useI18n()
+const { $t } = useFluent()
 
 const languageKeyword = $ref('')
 
@@ -42,7 +42,7 @@ function chooseLanguage(language: string) {
   <div>
     <input
       v-model="languageKeyword"
-      :placeholder="t('language.search')"
+      :placeholder="$t('language_search')"
       p2 mb2 border-rounded w-full bg-transparent
       outline-none border="~ base"
     >

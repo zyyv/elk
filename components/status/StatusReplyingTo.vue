@@ -18,23 +18,23 @@ const account = isSelf ? computed(() => status.account) : useAccountById(status.
     v-if="status.inReplyToId"
     flex="~ gap2" items-center h-auto text-sm text-secondary
     :to="getStatusInReplyToRoute(status)"
-    :title="$t('status.replying_to', [account ? getDisplayName(account) : $t('status.someone')])"
+    :title="$t('status_replying_to', { username: account ? getDisplayName(account) : $ta('status_replying_to').unknown })"
     text-blue saturate-50 hover:saturate-100
   >
     <template v-if="isSelfReply">
       <div i-ri-discuss-line text-blue />
-      <span>{{ $t('status.show_full_thread') }}</span>
+      <span>{{ $t('status_show_full_thread') }}</span>
     </template>
     <template v-else>
       <div i-ri-chat-1-line text-blue />
-      <i18n-t keypath="status.replying_to">
-        <template v-if="account">
-          <AccountInlineInfo :account="account" :link="false" />
+      <i18n path="status_replying_to" flex gap-x-1>
+        <template #username="{ unknown }">
+          <AccountInlineInfo v-if="account" :account="account" :link="false" />
+          <template v-else>
+            {{ unknown }}
+          </template>
         </template>
-        <template v-else>
-          {{ $t('status.someone') }}
-        </template>
-      </i18n-t>
+      </i18n>
     </template>
   </NuxtLink>
 </template>

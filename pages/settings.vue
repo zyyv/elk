@@ -3,10 +3,10 @@ definePageMeta({
   wideLayout: true,
 })
 
-const { t } = useI18n()
+const { $t } = useFluent()
 
 useHeadFixed({
-  title: () => t('nav.settings'),
+  title: () => $t('nav_settings'),
 })
 
 const route = useRoute()
@@ -22,7 +22,7 @@ const isRootPath = computedEager(() => route.name === 'settings')
           <template #title>
             <div timeline-title-style flex items-center gap-2 @click="$scrollToTop">
               <div i-ri:settings-3-line />
-              <span>{{ $t('nav.settings') }}</span>
+              <span>{{ $t('nav_settings') }}</span>
             </div>
           </template>
           <div xl:w-97 lg:w-78 w-full>
@@ -30,44 +30,44 @@ const isRootPath = computedEager(() => route.name === 'settings')
               v-if="isHydrated && currentUser "
               command
               icon="i-ri:user-line"
-              :text="$t('settings.profile.label')"
+              :text="$t('settings_profile_label')"
               to="/settings/profile"
             />
             <SettingsItem
               command
               icon="i-ri-compasses-2-line"
-              :text="$t('settings.interface.label')"
+              :text="$t('settings_interface_label')"
               to="/settings/interface"
             />
             <SettingsItem
               v-if="isHydrated && currentUser"
               command
               icon="i-ri:notification-badge-line"
-              :text="$t('settings.notifications_settings')"
+              :text="$t('settings_notifications_settings')"
               to="/settings/notifications"
             />
             <SettingsItem
               command
               icon="i-ri-globe-line"
-              :text="$t('settings.language.label')"
+              :text="$t('settings_language_label')"
               to="/settings/language"
             />
             <SettingsItem
               command
               icon="i-ri-equalizer-line"
-              :text="$t('settings.preferences.label')"
+              :text="$t('settings_preferences_label')"
               to="/settings/preferences"
             />
             <SettingsItem
               command
               icon="i-ri-group-line"
-              :text="$t('settings.users.label')"
+              :text="$t('settings_users_label')"
               to="/settings/users"
             />
             <SettingsItem
               command
               icon="i-ri:information-line"
-              :text="$t('settings.about.label')"
+              :text="$t('settings_about_label')"
               to="/settings/about"
             />
           </div>

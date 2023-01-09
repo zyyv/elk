@@ -72,7 +72,7 @@ const cropImage = () => {
     <div flex-1 w-0>
       <div text-lg text-center my2 px3>
         <h1>
-          {{ $t('action.edit') }}
+          {{ $t('action_edit') }}
         </h1>
       </div>
       <div aspect-ratio-1>
@@ -98,7 +98,7 @@ const cropImage = () => {
           btn-solid w-full rounded text-sm
           @click="cropImage()"
         >
-          {{ $t('action.confirm') }}
+          {{ $t('action_confirm') }}
         </button>
       </div>
     </div>

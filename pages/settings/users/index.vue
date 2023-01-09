@@ -2,10 +2,10 @@
 import { fileOpen } from 'browser-fs-access'
 import type { UserLogin } from '~/types'
 
-const { t } = useI18n()
+const { $t } = useFluent()
 
 useHeadFixed({
-  title: () => `${t('settings.users.label')} | ${t('nav.settings')}`,
+  title: () => `${$t('settings_users_label')} | ${$t('nav_settings')}`,
 })
 
 const loggedInUsers = useUsers()
@@ -63,7 +63,7 @@ async function importTokens() {
   <MainContent back-on-small-screen>
     <template #title>
       <div text-lg font-bold flex items-center gap-2 @click="$scrollToTop">
-        <span>{{ $t('settings.users.label') }}</span>
+        <span>{{ $t('settings_users_label') }}</span>
       </div>
     </template>
     <div p6>
@@ -76,12 +76,12 @@ async function importTokens() {
         <div my4 border="t base" />
         <button btn-text flex="~ gap-2" items-center @click="exportTokens">
           <div i-ri-download-2-line />
-          {{ $t('settings.users.export') }}
+          {{ $t('settings_users_export') }}
         </button>
       </template>
       <button btn-text flex="~ gap-2" items-center @click="importTokens">
         <div i-ri-upload-2-line />
-        {{ $t('settings.users.import') }}
+        {{ $t('settings_users_import') }}
       </button>
     </div>
   </MainContent>

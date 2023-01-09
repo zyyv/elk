@@ -131,7 +131,7 @@ const { formatNumber } = useHumanReadableNumber()
   <CommonPaginator :paginator="paginator" :preprocess="preprocess" :stream="stream" :eager="3" event-type="notification">
     <template #updater="{ number, update }">
       <button py-4 border="b base" flex="~ col" p-3 w-full text-primary font-bold @click="() => { update(); clearNotifications() }">
-        {{ $t('timeline.show_new_items', number, { named: { v: formatNumber(number) } }) }}
+        {{ $t('timeline_show_new_items', { count: number }) }}
       </button>
     </template>
     <template #items="{ items }">

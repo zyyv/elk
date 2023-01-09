@@ -1,23 +1,23 @@
 <script setup lang="ts">
-const { t } = useI18n()
+const { $t } = useFluent()
 
 const tabs = $computed(() => [
   {
     to: `/${currentServer.value}/explore`,
-    display: t('tab.posts'),
+    display: $t('tab_posts'),
   },
   {
     to: `/${currentServer.value}/explore/tags`,
-    display: t('tab.hashtags'),
+    display: $t('tab_hashtags'),
   },
   {
     to: `/${currentServer.value}/explore/links`,
-    display: t('tab.news'),
+    display: $t('tab_news'),
   },
   // This section can only be accessed after logging in
   {
     to: `/${currentServer.value}/explore/users`,
-    display: t('tab.for_you'),
+    display: $t('tab_for_you'),
     disabled: !isMastoInitialised.value || !currentUser.value,
   },
 ] as const)
@@ -28,7 +28,7 @@ const tabs = $computed(() => [
     <template #title>
       <span timeline-title-style flex items-center gap-2 cursor-pointer @click="$scrollToTop">
         <div i-ri:hashtag />
-        <span>{{ t('nav.explore') }}</span>
+        <span>{{ $t('nav_explore') }}</span>
       </span>
     </template>
 

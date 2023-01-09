@@ -48,13 +48,13 @@ async function unmute() {
   }
 }
 
-const { t } = useI18n()
+const { $t } = useFluent()
 
 useCommand({
   scope: 'Actions',
   order: -2,
   visible: () => command && enable,
-  name: () => `${relationship?.following ? t('account.unfollow') : t('account.follow')} ${getShortHandle(account)}`,
+  name: () => `${relationship?.following ? $t('account_unfollow') : $t('account_follow')} ${getShortHandle(account)}`,
   icon: 'i-ri:star-line',
   onActivate: () => toggleFollow(),
 })
@@ -87,26 +87,26 @@ const buttonStyle = $computed(() => {
     @click="relationship?.blocking ? unblock() : relationship?.muting ? unmute() : toggleFollow()"
   >
     <template v-if="relationship?.blocking">
-      <span group-hover="hidden">{{ $t('account.blocking') }}</span>
-      <span hidden group-hover="inline">{{ $t('account.unblock') }}</span>
+      <span group-hover="hidden">{{ $t('account_blocking') }}</span>
+      <span hidden group-hover="inline">{{ $t('account_unblock') }}</span>
     </template>
     <template v-if="relationship?.muting">
-      <span group-hover="hidden">{{ $t('account.muting') }}</span>
-      <span hidden group-hover="inline">{{ $t('account.unmute') }}</span>
+      <span group-hover="hidden">{{ $t('account_muting') }}</span>
+      <span hidden group-hover="inline">{{ $t('account_unmute') }}</span>
     </template>
     <template v-else-if="relationship?.following">
-      <span group-hover="hidden">{{ relationship.followedBy ? $t('account.mutuals') : $t('account.following') }}</span>
-      <span hidden group-hover="inline">{{ $t('account.unfollow') }}</span>
+      <span group-hover="hidden">{{ relationship.followedBy ? $t('account_mutuals') : $t('account_following') }}</span>
+      <span hidden group-hover="inline">{{ $t('account_unfollow') }}</span>
     </template>
     <template v-else-if="relationship?.requested">
-      <span>{{ $t('account.follow_requested') }}</span>
+      <span>{{ $t('account_follow_requested') }}</span>
     </template>
     <template v-else-if="relationship?.followedBy">
-      <span group-hover="hidden">{{ $t('account.follows_you') }}</span>
-      <span hidden group-hover="inline">{{ $t('account.follow_back') }}</span>
+      <span group-hover="hidden">{{ $t('account_follows_you') }}</span>
+      <span hidden group-hover="inline">{{ $t('account_follow_back') }}</span>
     </template>
     <template v-else>
-      <span>{{ $t('account.follow') }}</span>
+      <span>{{ $t('account_follow') }}</span>
     </template>
   </button>
 </template>

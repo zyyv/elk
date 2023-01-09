@@ -34,7 +34,7 @@ const reply = () => {
   <div flex justify-between>
     <div flex-1>
       <StatusActionButton
-        :content="$t('action.reply')"
+        :content="$t('action_reply')"
         :text="status.repliesCount || ''"
         color="text-blue" hover="text-blue" group-hover="bg-blue/10"
         icon="i-ri:chat-1-line"
@@ -43,7 +43,7 @@ const reply = () => {
       >
         <template v-if="status.repliesCount" #text>
           <CommonLocalizedNumber
-            keypath="action.reply_count"
+            keypath="action_reply_count"
             :count="status.repliesCount"
           />
         </template>
@@ -52,7 +52,7 @@ const reply = () => {
 
     <div flex-1>
       <StatusActionButton
-        :content="$t('action.boost')"
+        :content="$t('action_boost')"
         :text="status.reblogsCount || ''"
         color="text-green" hover="text-green" group-hover="bg-green/10"
         icon="i-ri:repeat-line"
@@ -64,7 +64,7 @@ const reply = () => {
       >
         <template v-if="status.reblogsCount" #text>
           <CommonLocalizedNumber
-            keypath="action.boost_count"
+            keypath="action_boost_count"
             :count="status.reblogsCount"
           />
         </template>
@@ -73,7 +73,7 @@ const reply = () => {
 
     <div flex-1>
       <StatusActionButton
-        :content="$t('action.favourite')"
+        :content="$t('action_favourite')"
         :text="status.favouritesCount || ''"
         color="text-rose" hover="text-rose" group-hover="bg-rose/10"
         icon="i-ri:heart-3-line"
@@ -85,7 +85,7 @@ const reply = () => {
       >
         <template v-if="status.favouritesCount" #text>
           <CommonLocalizedNumber
-            keypath="action.favourite_count"
+            keypath="action_favourite_count"
             :count="status.favouritesCount"
           />
         </template>
@@ -94,7 +94,7 @@ const reply = () => {
 
     <div flex-none>
       <StatusActionButton
-        :content="$t('action.bookmark')"
+        :content="$t('action_bookmark')"
         color="text-yellow" hover="text-yellow" group-hover="bg-yellow/10"
         icon="i-ri:bookmark-line"
         active-icon="i-ri:bookmark-fill"

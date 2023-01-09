@@ -17,6 +17,6 @@ const disabledVisual = computed(() => isMastoInitialised.value && !currentUser.v
     @click="openPublishDialog()"
   >
     <div i-ri:quill-pen-line />
-    <span hidden xl:block>{{ $t('action.compose') }}</span>
+    <span hidden xl:block>{{ $t('action_compose') }}</span>
   </button>
 </template>

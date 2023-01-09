@@ -222,8 +222,8 @@ const onKeyDown = (e: KeyboardEvent) => {
       <div v-else p5 text-center text-secondary italic>
         {{
           input.trim().length
-            ? $t('common.not_found')
-            : $t('search.search_desc')
+            ? $t('common_not_found')
+            : $t('search_search_desc')
         }}
       </div>
     </div>

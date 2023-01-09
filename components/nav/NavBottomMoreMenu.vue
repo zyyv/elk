@@ -80,7 +80,7 @@ onBeforeUnmount(() => {
               @click="toggleDark()"
             >
               <span class="i-ri:sun-line dark:i-ri:moon-line flex-shrink-0 text-xl me-4 !align-middle" />
-              {{ colorMode.value === 'light' ? $t('menu.toggle_theme.dark') : $t('menu.toggle_theme.light') }}
+              {{ colorMode.value === 'light' ? $t('menu_toggle_theme_dark') : $t('menu_toggle_theme_light') }}
             </button>
           </div>
         </div>

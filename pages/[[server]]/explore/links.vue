@@ -1,20 +1,20 @@
 <script lang="ts" setup>
 import { STORAGE_KEY_HIDE_EXPLORE_NEWS_TIPS } from '~~/constants'
 
-const { t } = useI18n()
+const { $t } = useFluent()
 
 const paginator = useMasto().v1.trends.listLinks()
 
 const hideNewsTips = useLocalStorage(STORAGE_KEY_HIDE_EXPLORE_NEWS_TIPS, false)
 
 useHeadFixed({
-  title: () => `${t('tab.news')} | ${t('nav.explore')}`,
+  title: () => `${$t('tab_news')} | ${$t('nav_explore')}`,
 })
 </script>
 
 <template>
   <CommonAlert v-if="isHydrated && !hideNewsTips" @close="hideNewsTips = true">
-    <p>{{ $t('tooltip.explore_links_intro') }}</p>
+    <p>{{ $t('tooltip_explore_links_intro') }}</p>
   </CommonAlert>
 
   <CommonPaginator v-bind="{ paginator }">

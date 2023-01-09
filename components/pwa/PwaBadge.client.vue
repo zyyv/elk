@@ -7,7 +7,7 @@
   >
     <div i-ri-download-cloud-2-line />
     <h2 flex="~ gap-2" items-center>
-      {{ $t('pwa.update_available_short') }}
+      {{ $t('pwa_update_available_short') }}
     </h2>
   </button>
 </template>
