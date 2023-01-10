@@ -280,8 +280,13 @@ tag_follow = Стежити
 tag_follow_label = Стежити за хештеґом {$tag}
 tag_unfollow = Не стежити
 tag_unfollow_label = Не стежити за хештеґом {$tag}
-time_ago_options_day_future = через {n} днів|через {n} день|через {n} дні|через {n} днів
-time_ago_options_day_past = {n} днів томо|{n} день тому|{n} дні тому|{n} днів тому
+time_ago_options_day_future = { $n ->
+  [1] завтра
+  [one] через {$n} день
+  [few] через {$n} дні
+  *[many] через {$n} днів
+}
+time_ago_options_day_past = {n} днів тому|{n} день тому|{n} дні тому|{n} днів тому
 time_ago_options_hour_future = через {n} годин|через {n} годину|через {n} години|через {n} годин
 time_ago_options_hour_past = {n} годин тому|{n} годину тому|{n} години тому|{n} годин тому
 time_ago_options_just_now = тільки що
