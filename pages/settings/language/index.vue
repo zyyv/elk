@@ -1,5 +1,5 @@
 <script setup lang="ts">
-const { t } = useI18n()
+const { t, localeProperties } = useI18n()
 
 useHeadFixed({
   title: () => `${t('settings.language.label')} | ${t('nav.settings')}`,
@@ -18,6 +18,15 @@ useHeadFixed({
         <p font-medium>{{ $t('settings.language.display_language') }}</p>
         <SettingsLanguage select-settings />
       </label>
+
+      <SettingsToggleItem
+        v-if="localeProperties.adoptInclusiveWriting"
+        :checked="getWellnessSetting('useInclusiveWriting')"
+        m-t
+        @click="toggleWellnessSetting('useInclusiveWriting')"
+      >
+        {{ $t('settings.language.inclusive') }}
+      </SettingsToggleItem>
     </div>
   </MainContent>
 </template>

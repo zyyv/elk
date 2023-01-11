@@ -13,6 +13,7 @@ export interface WellnessSettings {
   hideBoostCount: boolean
   hideFavoriteCount: boolean
   hideFollowerCount: boolean
+  useInclusiveWriting: boolean
 }
 
 export interface UserSettings {
@@ -38,6 +39,7 @@ export const DEFAULT_WELLNESS_SETTINGS: WellnessSettings = {
   hideBoostCount: false,
   hideFavoriteCount: false,
   hideFollowerCount: false,
+  useInclusiveWriting: true,
 }
 
 export const DEFAULT_FEATURE_FLAGS: FeatureFlags = {
