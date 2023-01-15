@@ -2,9 +2,8 @@ import type { NuxtI18nOptions } from '@nuxtjs/i18n'
 import type { DateTimeFormats, NumberFormats, PluralizationRule, PluralizationRules } from '@intlify/core-base'
 
 import type { LocaleObject } from '#i18n'
-import { satisfies } from '~~/mocks/semver'
 
-interface InclusiveLocaleKey {
+export interface InclusiveLocaleKey {
   adoptInclusiveWriting?: boolean
   inclusiveTransform?: (term: string) => string
 }
@@ -16,7 +15,7 @@ declare module '#i18n' {
   }
 }
 
-const locales: LocaleObject[] = [
+export const locales: LocaleObject[] = [
   {
     code: 'en-US',
     file: 'en-US.json',
@@ -73,7 +72,7 @@ const locales: LocaleObject[] = [
     name: 'Français',
     adoptInclusiveWriting: true,
     inclusiveTransform(term: string) {
-      return term.replace(/·\w+·?/, '')
+      return term.replaceAll(/·\w+·?/g, '')
     },
   },
   {
