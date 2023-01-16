@@ -1,5 +1,4 @@
 import { createResolver } from '@nuxt/kit'
-import Inspect from 'vite-plugin-inspect'
 import { isCI, isDevelopment, isWindows } from 'std-env'
 import { isPreview } from './config/env'
 import { i18n } from './config/i18n'
@@ -25,17 +24,14 @@ export default defineNuxtConfig({
     '@vue-macros/nuxt',
     '@nuxtjs/i18n',
     '@nuxtjs/color-mode',
-    ...!isDevelopment || !isWindows ? ['nuxt-security'] : [],
+    '@nuxt/devtools-edge',
+    ...(isDevelopment || isWindows) ? [] : ['nuxt-security'],
     '~/modules/purge-comments',
     '~/modules/setup-components',
     '~/modules/build-env',
     '~/modules/tauri/index',
     '~/modules/pwa/index', // change to '@vite-pwa/nuxt' once released and remove pwa module
     '~/modules/stale-dep',
-    ['unplugin-vue-inspector/nuxt', {
-      enabled: false,
-      toggleButtonVisibility: 'never',
-    }],
   ],
   experimental: {
     payloadExtraction: false,
@@ -73,9 +69,6 @@ export default defineNuxtConfig({
     build: {
       target: 'esnext',
     },
-    plugins: [
-      Inspect(),
-    ],
   },
   postcss: {
     plugins: {
@@ -146,6 +139,8 @@ export default defineNuxtConfig({
       ],
     },
   },
+  // eslint-disable-next-line @typescript-eslint/prefer-ts-expect-error
+  // @ts-ignore - nuxt-security is conditionally added
   security: {
     headers: {
       crossOriginEmbedderPolicy: false,
