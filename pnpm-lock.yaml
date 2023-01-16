@@ -43,7 +43,7 @@ importers:
       '@iconify-json/ri': ^1.1.4
       '@iconify-json/twemoji': ^1.1.10
       '@iconify/utils': ^2.0.11
-      '@nuxt/devtools-edge': 0.0.0-27898047.65e8746
+      '@nuxt/devtools-edge': 0.0.0-27898210.8b1b854
       '@nuxtjs/color-mode': ^3.2.0
       '@nuxtjs/i18n': ^8.0.0-beta.7
       '@pinia/nuxt': ^0.4.6
@@ -173,7 +173,7 @@ importers:
       '@iconify-json/ph': 1.1.3
       '@iconify-json/ri': 1.1.4
       '@iconify-json/twemoji': 1.1.10
-      '@nuxt/devtools-edge': 0.0.0-27898047.65e8746
+      '@nuxt/devtools-edge': 0.0.0-27898210.8b1b854
       '@nuxtjs/color-mode': 3.2.0
       '@nuxtjs/i18n': 8.0.0-beta.7
       '@pinia/nuxt': 0.4.6_typescript@4.9.4
@@ -2516,8 +2516,8 @@ packages:
     resolution: {integrity: sha512-YBI/6o2EBz02tdEJRBK8xkt3zvOFOWlLBf7WKYGBsSYSRtjjgrqPe2skp6VLLmKx5WbHHDNcW+6oACaurxGzeA==}
     dev: true
 
-  /@nuxt/devtools-edge/0.0.0-27898047.65e8746:
-    resolution: {integrity: sha512-SFaA9GTWkTGS1PprG+31Oo1IoDQv/8Wkcp5fj4kH+MDS4Y+K00NBCWveBGO1gnfUyJvOqb25Yw9+3Or1kbWXzw==}
+  /@nuxt/devtools-edge/0.0.0-27898210.8b1b854:
+    resolution: {integrity: sha512-yoWjLQfgz6BTlb+Y+AT1Dyfpi8KbY/EdZ7tPlxuJSe19JUgqw9x+jfHjrM2c5s5iC+QV4trnQpXS732w20YgNA==}
     dependencies:
       '@antfu/utils': 0.7.2
       '@nuxt/kit': 3.0.0
