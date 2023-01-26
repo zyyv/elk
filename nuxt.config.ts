@@ -25,6 +25,7 @@ export default defineNuxtConfig({
     '@nuxtjs/i18n',
     '@nuxtjs/color-mode',
     '@nuxt/devtools-edge',
+    'nuxt-vitest',
     ...(isDevelopment || isWindows) ? [] : ['nuxt-security'],
     '~/modules/purge-comments',
     '~/modules/setup-components',
@@ -44,6 +45,9 @@ export default defineNuxtConfig({
     '~/styles/default-theme.css',
     '~/styles/vars.css',
     '~/styles/global.css',
+    ...process.env.TAURI_PLATFORM === 'macos'
+      ? []
+      : ['~/styles/scrollbars.css'],
     '~/styles/tiptap.css',
     '~/styles/dropdown.css',
   ],
@@ -105,6 +109,11 @@ export default defineNuxtConfig({
     },
   },
   nitro: {
+    esbuild: {
+      options: {
+        target: 'esnext',
+      },
+    },
     prerender: {
       crawlLinks: true,
       routes: ['/'],
@@ -155,7 +164,7 @@ export default defineNuxtConfig({
           'img-src': ['\'self\'', 'https:', 'http:', 'data:'],
           'media-src': ['\'self\'', 'https:', 'http:'],
           'object-src': ['\'none\''],
-          'script-src': ['\'self\'', '\'unsafe-inline\''],
+          'script-src': ['\'self\'', '\'unsafe-inline\'', '\'wasm-unsafe-eval\''],
           'script-src-attr': ['\'none\''],
           'style-src': ['\'self\'', '\'unsafe-inline\''],
           'upgrade-insecure-requests': true,

@@ -2,12 +2,18 @@
 import { describe, expect, it, vi } from 'vitest'
 import { renderToString } from 'vue/server-renderer'
 import { format } from 'prettier'
+import type { mastodon } from 'masto'
 import { contentToVNode } from '~/composables/content-render'
-import type { ContentParseOptions } from '~~/composables/content-parse'
+import type { ContentParseOptions } from '~/composables/content-parse'
 
 describe('content-rich', () => {
   it('empty', async () => {
     const { formatted } = await render('')
+    expect(formatted).toMatchSnapshot()
+  })
+
+  it('plain text', async () => {
+    const { formatted } = await render('hello there', { collapseMentionLink: true })
     expect(formatted).toMatchSnapshot()
   })
 
@@ -79,27 +85,27 @@ describe('content-rich', () => {
     expect(formatted).toMatchSnapshot()
   })
 
-  it('collapse metions', async () => {
+  it('collapse mentions', async () => {
     const { formatted } = await render('<p><span class="h-card"><a href="https://m.webtoo.ls/@elk" class="u-url mention" rel="nofollow noopener noreferrer" target="_blank">@<span>elk</span></a></span> <span class="h-card"><a href="https://m.webtoo.ls/@elk" class="u-url mention" rel="nofollow noopener noreferrer" target="_blank">@<span>elk</span></a></span> content <span class="h-card"><a href="https://m.webtoo.ls/@antfu" class="u-url mention" rel="nofollow noopener noreferrer" target="_blank">@<span>antfu</span></a></span> <span class="h-card"><a href="https://mastodon.roe.dev/@daniel" class="u-url mention" rel="nofollow noopener noreferrer" target="_blank">@<span>daniel</span></a></span> <span class="h-card"><a href="https://m.webtoo.ls/@sxzz" class="u-url mention" rel="nofollow noopener noreferrer" target="_blank">@<span>sxzz</span></a></span> <span class="h-card"><a href="https://m.webtoo.ls/@patak" class="u-url mention" rel="nofollow noopener noreferrer" target="_blank">@<span>patak</span></a></span> content</p>', {
       collapseMentionLink: true,
     })
     expect(formatted).toMatchInlineSnapshot(`
       "<p>
-        <mention-group
-          ><span class=\\"h-card\\"
-            ><a
-              class=\\"u-url mention\\"
-              rel=\\"nofollow noopener noreferrer\\"
-              to=\\"/m.webtoo.ls/@elk\\"
-            ></a
-          ></span>
-          <span class=\\"h-card\\"
-            ><a
-              class=\\"u-url mention\\"
-              rel=\\"nofollow noopener noreferrer\\"
-              to=\\"/m.webtoo.ls/@elk\\"
-            ></a></span></mention-group
-        >content
+        <span class=\\"h-card\\"
+          ><a
+            class=\\"u-url mention\\"
+            rel=\\"nofollow noopener noreferrer\\"
+            to=\\"/m.webtoo.ls/@elk\\"
+          ></a
+        ></span>
+        <span class=\\"h-card\\"
+          ><a
+            class=\\"u-url mention\\"
+            rel=\\"nofollow noopener noreferrer\\"
+            to=\\"/m.webtoo.ls/@elk\\"
+          ></a
+        ></span>
+        content
         <span class=\\"h-card\\"
           ><a
             class=\\"u-url mention\\"
@@ -129,6 +135,71 @@ describe('content-rich', () => {
           ></a
         ></span>
         content
+      </p>
+      "
+    `)
+  })
+
+  it('hides collapsed mentions', async () => {
+    const { formatted } = await render('<p><span class="h-card"><a href="https://m.webtoo.ls/@elk" class="u-url mention" rel="nofollow noopener noreferrer" target="_blank">@<span>elk</span></a></span> content</p>', {
+      collapseMentionLink: true,
+      inReplyToStatus: { account: { acct: 'elk@webtoo.ls' }, mentions: [] as mastodon.v1.StatusMention[] } as mastodon.v1.Status,
+    })
+    expect(formatted).toMatchInlineSnapshot(`
+      "<p>content</p>
+      "
+    `)
+  })
+
+  it('shows some collapsed mentions inline', async () => {
+    const { formatted } = await render('<p><span class="h-card"><a href="https://m.webtoo.ls/@elk" class="u-url mention" rel="nofollow noopener noreferrer" target="_blank">@<span>elk</span></a></span> <span class="h-card"><a href="https://m.webtoo.ls/@antfu" class="u-url mention" rel="nofollow noopener noreferrer" target="_blank">@<span>antfu</span></a></span> content</p>', {
+      collapseMentionLink: true,
+      inReplyToStatus: { account: { acct: 'elk@webtoo.ls' }, mentions: [] as mastodon.v1.StatusMention[] } as mastodon.v1.Status,
+    })
+    expect(formatted).toMatchInlineSnapshot(`
+      "<p>
+        <span class=\\"h-card\\"
+          ><a
+            class=\\"u-url mention\\"
+            rel=\\"nofollow noopener noreferrer\\"
+            to=\\"/m.webtoo.ls/@antfu\\"
+          ></a
+        ></span>
+        content
+      </p>
+      "
+    `)
+  })
+
+  it('shows some collapsed mentions grouped', async () => {
+    const { formatted } = await render('<p><span class="h-card"><a href="https://m.webtoo.ls/@elk" class="u-url mention" rel="nofollow noopener noreferrer" target="_blank">@<span>elk</span></a></span> <span class="h-card"><a href="https://m.webtoo.ls/@antfu" class="u-url mention" rel="nofollow noopener noreferrer" target="_blank">@<span>antfu</span></a></span> <span class="h-card"><a href="https://m.webtoo.ls/@patak" class="u-url mention" rel="nofollow noopener noreferrer" target="_blank">@<span>patak</span></a></span> <span class="h-card"><a href="https://m.webtoo.ls/@sxzz" class="u-url mention" rel="nofollow noopener noreferrer" target="_blank">@<span>sxzz</span></a></span>content</p>', {
+      collapseMentionLink: true,
+      inReplyToStatus: { account: { acct: 'elk@webtoo.ls' }, mentions: [] as mastodon.v1.StatusMention[] } as mastodon.v1.Status,
+    })
+    expect(formatted).toMatchInlineSnapshot(`
+      "<p>
+        <mention-group
+          ><span class=\\"h-card\\"
+            ><a
+              class=\\"u-url mention\\"
+              rel=\\"nofollow noopener noreferrer\\"
+              to=\\"/m.webtoo.ls/@antfu\\"
+            ></a
+          ></span>
+          <span class=\\"h-card\\"
+            ><a
+              class=\\"u-url mention\\"
+              rel=\\"nofollow noopener noreferrer\\"
+              to=\\"/m.webtoo.ls/@patak\\"
+            ></a
+          ></span>
+          <span class=\\"h-card\\"
+            ><a
+              class=\\"u-url mention\\"
+              rel=\\"nofollow noopener noreferrer\\"
+              to=\\"/m.webtoo.ls/@sxzz\\"
+            ></a></span></mention-group
+        >content
       </p>
       "
     `)

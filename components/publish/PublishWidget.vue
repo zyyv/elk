@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { EditorContent } from '@tiptap/vue-3'
+import stringLength from 'string-length'
 import type { mastodon } from 'masto'
 import type { Draft } from '~/types'
 
@@ -34,7 +35,7 @@ const {
   dropZoneRef,
 } = $(useUploadMediaAttachment($$(draft)))
 
-let { shouldExpanded, isExpanded, isSending, isPublishDisabled, publishDraft } = $(usePublish(
+let { shouldExpanded, isExpanded, isSending, isPublishDisabled, publishDraft, failedMessages } = $(usePublish(
   {
     draftState,
     ...$$({ expanded, isUploading, initialDraft: initial }),
@@ -62,7 +63,7 @@ const { editor } = useTiptap({
   onPaste: handlePaste,
 })
 const characterCount = $computed(() => {
-  let length = htmlToText(editor.value?.getHTML() || '').length
+  let length = stringLength(htmlToText(editor.value?.getHTML() || ''))
 
   if (draft.mentions) {
     // + 1 is needed as mentions always need a space seperator at the end
@@ -144,7 +145,7 @@ defineExpose({
         border="2 dashed transparent"
         :class="[isSending ? 'pointer-events-none' : '', isOverDropZone ? '!border-primary' : '']"
       >
-        <ContentMentionGroup v-if="draft.mentions?.length && shouldExpanded">
+        <ContentMentionGroup v-if="draft.mentions?.length && shouldExpanded" replying>
           <button v-for="m, i of draft.mentions" :key="m" text-primary hover:color-red @click="draft.mentions?.splice(i, 1)">
             {{ acctToShortHandle(m) }}
           </button>
@@ -160,6 +161,29 @@ defineExpose({
           >
         </div>
 
+        <PublishErrMessage v-if="failedMessages.length > 0" described-by="publish-failed">
+          <head id="publish-failed" flex justify-between>
+            <div flex items-center gap-x-2 font-bold>
+              <div aria-hidden="true" i-ri:error-warning-fill />
+              <p>{{ $t('state.publish_failed') }}</p>
+            </div>
+            <CommonTooltip placement="bottom" :content="$t('action.clear_publish_failed')">
+              <button
+                flex rounded-4 p1 hover:bg-active cursor-pointer transition-100 :aria-label="$t('action.clear_publish_failed')"
+                @click="failedMessages = []"
+              >
+                <span aria-hidden="true" w="1.75em" h="1.75em" i-ri:close-line />
+              </button>
+            </CommonTooltip>
+          </head>
+          <ol ps-2 sm:ps-1>
+            <li v-for="(error, i) in failedMessages" :key="i" flex="~ col sm:row" gap-y-1 sm:gap-x-2>
+              <strong>{{ i + 1 }}.</strong>
+              <span>{{ error }}</span>
+            </li>
+          </ol>
+        </PublishErrMessage>
+
         <div relative flex-1 flex flex-col>
           <EditorContent
             :editor="editor"
@@ -174,15 +198,9 @@ defineExpose({
           </div>
           {{ $t('state.uploading') }}
         </div>
-        <div
+        <PublishErrMessage
           v-else-if="failedAttachments.length > 0"
-          role="alert"
-          :aria-describedby="isExceedingAttachmentLimit ? 'upload-failed uploads-per-post' : 'upload-failed'"
-          flex="~ col"
-          gap-1 text-sm
-          pt-1 ps-2 pe-1 pb-2
-          text-red-600 dark:text-red-400
-          border="~ base rounded red-600 dark:red-400"
+          :described-by="isExceedingAttachmentLimit ? 'upload-failed uploads-per-post' : 'upload-failed'"
         >
           <head id="upload-failed" flex justify-between>
             <div flex items-center gap-x-2 font-bold>
@@ -191,10 +209,8 @@ defineExpose({
             </div>
             <CommonTooltip placement="bottom" :content="$t('action.clear_upload_failed')">
               <button
-                flex rounded-4 p1
-                hover:bg-active cursor-pointer transition-100
-                :aria-label="$t('action.clear_upload_failed')"
-                @click="failedAttachments = []"
+                flex rounded-4 p1 hover:bg-active cursor-pointer transition-100
+                :aria-label="$t('action.clear_upload_failed')" @click="failedAttachments = []"
               >
                 <span aria-hidden="true" w="1.75em" h="1.75em" i-ri:close-line />
               </button>
@@ -209,7 +225,7 @@ defineExpose({
               <span>{{ error[0] }}</span>
             </li>
           </ol>
-        </div>
+        </PublishErrMessage>
 
         <div v-if="draft.attachments.length" flex="~ col gap-2" overflow-auto>
           <PublishAttachment
@@ -291,7 +307,18 @@ defineExpose({
           </template>
         </PublishVisibilityPicker>
 
-        <CommonTooltip id="publish-tooltip" placement="top" :content="$t('tooltip.add_publishable_content')" :disabled="!isPublishDisabled">
+        <CommonTooltip v-if="failedMessages.length > 0" id="publish-failed-tooltip" placement="top" :content="$t('tooltip.publish_failed')">
+          <button
+            btn-danger rounded-3 text-sm w-full flex="~ gap1" items-center md:w-fit aria-describedby="publish-failed-tooltip"
+          >
+            <span block>
+              <div block i-carbon:face-dizzy-filled />
+            </span>
+            <span>{{ $t('state.publish_failed') }}</span>
+          </button>
+        </CommonTooltip>
+
+        <CommonTooltip v-else id="publish-tooltip" placement="top" :content="$t('tooltip.add_publishable_content')" :disabled="!isPublishDisabled">
           <button
             btn-solid rounded-3 text-sm w-full flex="~ gap1" items-center
             md:w-fit
@@ -302,6 +329,9 @@ defineExpose({
           >
             <span v-if="isSending" block animate-spin preserve-3d>
               <div block i-ri:loader-2-fill />
+            </span>
+            <span v-if="failedMessages.length" block>
+              <div block i-carbon:face-dizzy-filled />
             </span>
             <span v-if="draft.editingStatus">{{ $t('action.save_changes') }}</span>
             <span v-else-if="draft.params.inReplyToId">{{ $t('action.reply') }}</span>

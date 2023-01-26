@@ -27,18 +27,6 @@ const userSettings = useUserSettings()
 
 const isAuthor = $computed(() => status.account.id === currentUser.value?.account.id)
 
-const {
-  toggle: _toggleTranslation,
-  translation,
-  enabled: isTranslationEnabled,
-} = useTranslation(props.status)
-
-const toggleTranslation = async () => {
-  isLoading.translation = true
-  await _toggleTranslation()
-  isLoading.translation = false
-}
-
 const { client } = $(useMasto())
 
 const getPermalinkUrl = (status: mastodon.v1.Status) => {
@@ -50,6 +38,12 @@ const getPermalinkUrl = (status: mastodon.v1.Status) => {
 
 const copyLink = async (status: mastodon.v1.Status) => {
   const url = getPermalinkUrl(status)
+  if (url)
+    await clipboard.copy(url)
+}
+
+const copyOriginalLink = async (status: mastodon.v1.Status) => {
+  const url = status.url
   if (url)
     await clipboard.copy(url)
 }
@@ -179,6 +173,13 @@ const showFavoritedAndBoostedBy = () => {
           icon="i-ri:link"
           :command="command"
           @click="copyLink(status)"
+        />
+
+        <CommonDropdownItem
+          :text="$t('menu.copy_original_link_to_post')"
+          icon="i-ri:links-fill"
+          :command="command"
+          @click="copyOriginalLink(status)"
         />
 
         <CommonDropdownItem
